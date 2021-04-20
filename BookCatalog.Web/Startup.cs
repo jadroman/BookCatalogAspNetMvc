@@ -52,7 +52,8 @@ namespace BookCatalog.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller}/{action}/{id?}",
+                    defaults: new { controller = "Book", action = "index" });
             });
 
             DbInitializer.Initialize(app);
