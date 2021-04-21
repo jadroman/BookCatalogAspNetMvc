@@ -1,4 +1,5 @@
-﻿using BookCatalog.Web.Models;
+﻿using BookCatalog.Contracts.Interfaces;
+using BookCatalog.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,14 +13,27 @@ namespace BookCatalog.Web.Controllers
     public class CategoryController : Controller
     {
         private readonly ILogger<CategoryController> _logger;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(ILogger<CategoryController> logger)
+        public CategoryController(ILogger<CategoryController> logger, ICategoryService categoryService)
         {
             _logger = logger;
+            _categoryService = categoryService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            try
+            {
+
+                var bla = await _categoryService.GetCategoriesAsync();
+            }
+            catch (Exception e)
+            {
+
+            }
+
+
             return View();
         }
 

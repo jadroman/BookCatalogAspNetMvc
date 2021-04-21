@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalog.Web", "BookCatalog.Web\BookCatalog.Web.csproj", "{D4EC3A7F-01E7-4A26-BDC4-66A088D56A47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalog.Web", "BookCatalog.Web\BookCatalog.Web.csproj", "{D4EC3A7F-01E7-4A26-BDC4-66A088D56A47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalog.DAL", "BookCatalog.Infrastructure\BookCatalog.DAL.csproj", "{AFA9D577-7EA7-417A-8E75-6FA359512C3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalog.DAL", "BookCatalog.DAL\BookCatalog.DAL.csproj", "{AFA9D577-7EA7-417A-8E75-6FA359512C3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalog.Domain", "BookCatalog.Domain\BookCatalog.Domain.csproj", "{30988E4A-5640-4418-B9F8-1402B33F943B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalog.Domain", "BookCatalog.Domain\BookCatalog.Domain.csproj", "{30988E4A-5640-4418-B9F8-1402B33F943B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalog.Common", "BookCatalog.Common\BookCatalog.Common.csproj", "{77C0EC32-3E2E-4EA5-BF70-ABB66288C6E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalog.Contracts", "BookCatalog.Contracts\BookCatalog.Contracts.csproj", "{77C0EC32-3E2E-4EA5-BF70-ABB66288C6E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

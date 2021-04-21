@@ -1,4 +1,7 @@
+
+using BookCatalog.Contracts.Interfaces;
 using BookCatalog.DAL;
+using BookCatalog.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +31,8 @@ namespace BookCatalog.Web
             services.AddControllersWithViews();
             services.AddDbContext<BookContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BookCatalog")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IBookContext, BookContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,14 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookCatalog.DAL.Models
+namespace BookCatalog.Contracts.Entities
 {
-    public class Book
+    public class Category
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public Category Category { get; set; }
+        public string Name { get; set; }
+        public IEnumerable<Book> Books { get; set; }
     }
 }
