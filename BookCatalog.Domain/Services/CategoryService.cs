@@ -27,9 +27,5 @@ namespace BookCatalog.Domain.Services
         }
 
 
-        public List<Category> GetCategories()
-        {
-            return _bookContext.Categories.Include(c => c.Books).ToList();
-        }
     }
 }

@@ -1,5 +1,7 @@
-﻿using BookCatalog.Contracts.Interfaces;
+﻿using BookCatalog.Contracts.BindingModels;
+using BookCatalog.Contracts.Interfaces;
 using BookCatalog.Web.Models;
+using BookCatalog.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -23,18 +25,23 @@ namespace BookCatalog.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            try
+            var model = new CategoryLisViewModel();
+            var categBindings = new List<CategoryBindingModel>();
+            var categEntities = await _categoryService.GetCategoriesAsync();
+
+            foreach (var item in categEntities)
             {
-
-                var bla = await _categoryService.GetCategoriesAsync();
+                var cat = new CategoryBindingModel
+                {
+                    Id = item.Id,
+                    Name = item.Name
+                };
+                categBindings.Add(cat);
             }
-            catch (Exception e)
-            {
 
-            }
+            model.Categories = categBindings;
 
-
-            return View();
+            return View(model);
         }
 
     }

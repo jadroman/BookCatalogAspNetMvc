@@ -1,7 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Category";
-}
+﻿@model BookCatalog.Web.Models.ViewModels.CategoryLisViewModel
 
 <div class="text-center">
     <h1 class="display-4">Book categories</h1>
+
+    @foreach (var item in Model.Categories)
+    {
+        @item.Id @item.Name<br /><br />
+    }
 </div>

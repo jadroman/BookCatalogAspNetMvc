@@ -10,6 +10,5 @@ namespace BookCatalog.Contracts.Interfaces
     public interface ICategoryService
     {
         Task<List<Category>> GetCategoriesAsync();
-        List<Category> GetCategories();
     }
 }
