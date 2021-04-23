@@ -71,6 +71,32 @@ namespace BookCatalog.Web.Controllers
 
             return View(model);
         }
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var catEntity = await _categoryService.GetCategoryById(id.Value);
+
+            if (catEntity == null)
+            {
+                return NotFound();
+            }
+
+            var catEditBindModel = new CategoryEditBindingModel
+            {
+                Id = catEntity.Id,
+                Name = catEntity.Name
+            };
+
+            var model = new CategoryEditViewModel
+            {
+                Category = catEditBindModel
+            };
+
+            return View(model);
+        }
     }
 }
