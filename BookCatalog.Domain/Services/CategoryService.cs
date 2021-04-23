@@ -21,11 +21,18 @@ namespace BookCatalog.Domain.Services
             _bookContext = bookContext;
         }
 
-        public async Task<List<Category>> GetCategoriesAsync()
+        public async Task<List<Category>> GetAllCategories()
         {
             return await _bookContext.Categories.ToListAsync();
         }
 
+        public async Task<Category> GetCategoryById(int id)
+        {
+            var student = await _bookContext.Categories
+                 .AsNoTracking()
+                 .FirstOrDefaultAsync(c => c.Id == id);
 
+            return student;
+        }
     }
 }

@@ -1,10 +1,29 @@
-﻿@model BookCatalog.Web.Models.ViewModels.CategoryLisViewModel
+﻿@model BookCatalog.Web.Models.ViewModels.CategoryListViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Book categories</h1>
+<h1 style="margin-bottom:20px;margin-top: 5px">Book categories</h1>
 
-    @foreach (var item in Model.Categories)
-    {
-        @item.Id @item.Name<br /><br />
-    }
-</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Category Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Categories)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

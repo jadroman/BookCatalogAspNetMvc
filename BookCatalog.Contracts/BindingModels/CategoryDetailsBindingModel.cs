@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookCatalog.Contracts.BindingModels
 {
-    public class CategoryBindingModel
+    public class CategoryDetailsBindingModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

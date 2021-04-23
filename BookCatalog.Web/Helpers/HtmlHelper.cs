@@ -16,7 +16,7 @@ namespace BookCatalog.Web.Helpers
             IEnumerable<string> acceptedActions = (actions ?? currentAction).Split(',');
             IEnumerable<string> acceptedControllers = (controllers ?? currentController).Split(',');
 
-            return acceptedActions.Contains(currentAction) && acceptedControllers.Contains(currentController) ?
+            return acceptedControllers.Contains(currentController) ?
                 cssClass : "nav-item";
         }
     }

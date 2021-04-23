@@ -25,21 +25,49 @@ namespace BookCatalog.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = new CategoryLisViewModel();
-            var categBindings = new List<CategoryBindingModel>();
-            var categEntities = await _categoryService.GetCategoriesAsync();
+            var model = new CategoryListViewModel();
+            var catListBindModel = new List<CategoryListBindingModel>();
+            var catEntities = await _categoryService.GetAllCategories();
 
-            foreach (var item in categEntities)
+            foreach (var item in catEntities)
             {
-                var cat = new CategoryBindingModel
+                var cat = new CategoryListBindingModel
                 {
                     Id = item.Id,
                     Name = item.Name
                 };
-                categBindings.Add(cat);
+                catListBindModel.Add(cat);
             }
 
-            model.Categories = categBindings;
+            model.Categories = catListBindModel;
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var catEntity = await _categoryService.GetCategoryById(id.Value);
+
+            if (catEntity == null)
+            {
+                return NotFound();
+            }
+
+            var catDetailsBindModel = new CategoryDetailsBindingModel
+            {
+                Id = catEntity.Id,
+                Name = catEntity.Name
+            };
+
+            var model = new CategoryDetailsViewModel
+            {
+                Category = catDetailsBindModel
+            };
 
             return View(model);
         }

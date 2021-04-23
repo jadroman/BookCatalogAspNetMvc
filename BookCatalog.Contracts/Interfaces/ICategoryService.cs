@@ -9,6 +9,7 @@ namespace BookCatalog.Contracts.Interfaces
 {
     public interface ICategoryService
     {
-        Task<List<Category>> GetCategoriesAsync();
+        Task<List<Category>> GetAllCategories();
+        Task<Category> GetCategoryById(int id);
     }
 }

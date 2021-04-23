@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BookCatalog.Web.Models.ViewModels
 {
-    public class CategoryLisViewModel
+    public class CategoryListViewModel
     {
-        public IEnumerable<CategoryBindingModel> Categories { get; set; }
+        public IEnumerable<CategoryListBindingModel> Categories { get; set; }
     }
 }
