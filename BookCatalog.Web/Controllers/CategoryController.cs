@@ -102,30 +102,54 @@ namespace BookCatalog.Web.Controllers
             return View(model);
         }
 
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(CategoryEditViewModel categoryBind)
+        public async Task<IActionResult> Edit([Bind(include:"Category")]
+            CategoryEditViewModel categoryBind)
         {
-            var categToUpdate = await _categoryService.GetCategoryById(categoryBind.Category.Id);
-
-            if (categToUpdate == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
-            }
+                var categToUpdate = await _categoryService.GetCategoryById(categoryBind.Category.Id);
 
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
+                if (categToUpdate == null)
+                {
+                    return NotFound();
+                }
 
-            if (await _categoryService.SaveCategory(categoryBind.Category) < 1)
-            {
-                ModelState.AddModelError("", "Unable to save changes. " +
-                    "Try again, and if the problem persists, " +
-                    "see your system administrator.");
-            }
+                if (await _categoryService.SaveCategory(categoryBind.Category) < 1)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
+                }
 
+            }
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind(include:"Category")]
+            CategoryEditViewModel categoryBind)
+        {
+            if (ModelState.IsValid)
+            {
+                if (await _categoryService.SaveCategory(categoryBind.Category) < 1)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
+                }
+
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

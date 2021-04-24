@@ -1,7 +1,9 @@
 ﻿@model BookCatalog.Web.Models.ViewModels.CategoryListViewModel
 
 <h1 style="margin-bottom:20px;margin-top: 5px">Book categories</h1>
-
+<p>
+    <a class="btn btn-outline-success" asp-action="Create">Add</a>
+</p>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -19,8 +21,8 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td style="float:right">
-                    <a class="btn btn-outline-secondary  btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
-                    <a class="btn btn-outline-secondary  btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                    <a class="btn btn-outline-secondary  btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-outline-secondary  btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a>
                     <a class="btn btn-outline-danger  btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
