@@ -1,4 +1,5 @@
 ﻿
+using BookCatalog.Contracts.BindingModels;
 using BookCatalog.Contracts.Entities;
 using BookCatalog.Contracts.Interfaces;
 using BookCatalog.DAL;
@@ -28,11 +29,31 @@ namespace BookCatalog.Domain.Services
 
         public async Task<Category> GetCategoryById(int id)
         {
-            var student = await _bookContext.Categories
+            var category = await _bookContext.Categories
                  .AsNoTracking()
                  .FirstOrDefaultAsync(c => c.Id == id);
 
-            return student;
+            return category;
+        }
+
+        public async Task<int> SaveCategory(CategoryEditBindingModel categoryBinding)
+        {
+            var category = new Category
+            {
+                Id = categoryBinding.Id,
+                Name = categoryBinding.Name
+            };
+
+            if (category.Id == 0)
+            {
+                await _bookContext.Categories.AddAsync(category);
+            }
+            else
+            {
+                _bookContext.Update(category);
+            }
+
+            return await _bookContext.SaveChangesAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BookCatalog.Contracts.Entities;
+﻿using BookCatalog.Contracts.BindingModels;
+using BookCatalog.Contracts.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace BookCatalog.Contracts.Interfaces
     {
         Task<List<Category>> GetAllCategories();
         Task<Category> GetCategoryById(int id);
+        Task<int> SaveCategory(CategoryEditBindingModel category);
     }
 }

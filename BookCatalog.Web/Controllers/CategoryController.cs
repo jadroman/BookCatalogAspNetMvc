@@ -1,8 +1,10 @@
 ﻿using BookCatalog.Contracts.BindingModels;
+using BookCatalog.Contracts.Entities;
 using BookCatalog.Contracts.Interfaces;
 using BookCatalog.Web.Models;
 using BookCatalog.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -71,6 +73,7 @@ namespace BookCatalog.Web.Controllers
 
             return View(model);
         }
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -97,6 +100,32 @@ namespace BookCatalog.Web.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditPost(CategoryEditViewModel categoryBind)
+        {
+            var categToUpdate = await _categoryService.GetCategoryById(categoryBind.Category.Id);
+
+            if (categToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            if (await _categoryService.SaveCategory(categoryBind.Category) < 1)
+            {
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists, " +
+                    "see your system administrator.");
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
