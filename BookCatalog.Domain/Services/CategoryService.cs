@@ -27,6 +27,11 @@ namespace BookCatalog.Domain.Services
             return await _bookContext.Categories.ToListAsync();
         }
 
+        public DbSet<Category> GetAllCategories2()
+        {
+            return  _bookContext.Categories;
+        }
+
         public async Task<Category> GetCategoryById(int id)
         {
             var category = await _bookContext.Categories

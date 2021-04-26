@@ -1,31 +1,50 @@
-﻿@model BookCatalog.Web.Models.ViewModels.CategoryListViewModel
+﻿@*@model BookCatalog.Web.Models.ViewModels.CategoryListViewModel*@
 
 <h1 style="margin-bottom:20px;margin-top: 5px">Book categories</h1>
 <p>
     <a class="btn btn-outline-success" asp-action="Create">Add</a>
 </p>
-<table class="table table-striped">
+
+<link href="~/lib/datatables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<table id="categoryDatatable" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
     <thead>
         <tr>
-            <th>
-                Category Name
-            </th>
+            <th>Id</th>
+            <th>Name</th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model.Categories)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td style="float:right">
-                    <a class="btn btn-outline-secondary  btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-outline-secondary  btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a class="btn btn-outline-danger  btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
 </table>
+
+@section Scripts
+{
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/categoryDatatable.js"></script>
+}
+
+@*<table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Category Name
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categories)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td style="float:right">
+                        <a class="btn btn-outline-secondary  btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-outline-secondary  btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-outline-danger  btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
