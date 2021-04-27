@@ -76,3 +76,7 @@ body {
     color: rgba(0, 0, 0, 0.9);
     text-decoration: underline;
 }
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+}

@@ -1,14 +1,17 @@
 ﻿
 using BookCatalog.Contracts.BindingModels;
 using BookCatalog.Contracts.Entities;
+using BookCatalog.Contracts.Helpers;
 using BookCatalog.Contracts.Interfaces;
 using BookCatalog.DAL;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Dynamic.Core;
+using System.Linq;
 
 namespace BookCatalog.Domain.Services
 {
@@ -22,14 +25,35 @@ namespace BookCatalog.Domain.Services
             _bookContext = bookContext;
         }
 
-        public async Task<List<Category>> GetAllCategories()
+        public Task<List<Category>> GetAllCategories()
         {
-            return await _bookContext.Categories.ToListAsync();
+            return _bookContext.Categories.ToListAsync();
+        }
+
+        public Task<int> CountAllCategories()
+        {
+            return  _bookContext.Categories.CountAsync();
         }
 
         public DbSet<Category> GetAllCategories2()
         {
-            return  _bookContext.Categories;
+            return _bookContext.Categories;
+        }
+
+        public async Task<List<Category>> GetFilteredCategories(GridFilter filter)
+        {
+            var categoryData = (IQueryable<Category>) _bookContext.Categories;
+
+            if (!(string.IsNullOrEmpty(filter.SortColumn) && string.IsNullOrEmpty(filter.SortColumnDirection)))
+            {
+                categoryData = categoryData.OrderBy(filter.SortColumn + " " + filter.SortColumnDirection);
+            }
+            if (!string.IsNullOrEmpty(filter.SearchValue))
+            {
+                categoryData = categoryData.Where(m => m.Name.Contains(filter.SearchValue));
+            }
+
+            return await categoryData.Skip(filter.Skip).Take(filter.PageSize).ToListAsync();
         }
 
         public async Task<Category> GetCategoryById(int id)
@@ -59,6 +83,23 @@ namespace BookCatalog.Domain.Services
             }
 
             return await _bookContext.SaveChangesAsync();
+        }
+
+
+        public async Task<int> DeleteCategory(Category category)
+        {
+            try
+            {
+
+
+                _bookContext.Categories.Remove(category);
+
+                return await _bookContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return await Task.FromResult(0);
+            }
         }
     }
 }

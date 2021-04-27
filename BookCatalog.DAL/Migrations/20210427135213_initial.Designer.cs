@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookCatalog.DAL.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20210423140415_categoryNameLengthLimit")]
-    partial class categoryNameLengthLimit
+    [Migration("20210427135213_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,7 +64,7 @@ namespace BookCatalog.DAL.Migrations
                     b.HasOne("BookCatalog.Contracts.Entities.Category", "Category")
                         .WithMany("Books")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");

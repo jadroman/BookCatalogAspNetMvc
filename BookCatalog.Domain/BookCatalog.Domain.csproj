@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BookCatalog.Contracts\BookCatalog.Contracts.csproj" />
     <ProjectReference Include="..\BookCatalog.DAL\BookCatalog.DAL.csproj" />
   </ItemGroup>

@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
+using BookCatalog.Contracts.Helpers;
 
 namespace BookCatalog.Web.Controllers
 {
@@ -122,6 +123,7 @@ namespace BookCatalog.Web.Controllers
                     ModelState.AddModelError("", "Unable to save changes. " +
                         "Try again, and if the problem persists, " +
                         "see your system administrator.");
+                    return View(categoryBind);
                 }
 
             }
@@ -155,7 +157,7 @@ namespace BookCatalog.Web.Controllers
 
 
         [HttpPost]
-        public IActionResult GetCategories()
+        public async Task<IActionResult> GetCategories()
         {
             try
             {
@@ -167,19 +169,19 @@ namespace BookCatalog.Web.Controllers
                 var searchValue = Request.Form["search[value]"].FirstOrDefault();
                 int pageSize = length != null ? Convert.ToInt32(length) : 0;
                 int skip = start != null ? Convert.ToInt32(start) : 0;
-                int recordsTotal = 0;
-                var categoryData = (from tempcustomer in _categoryService.GetAllCategories2() select tempcustomer);
-                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+
+                var filter = new GridFilter
                 {
-                    categoryData = categoryData.OrderBy(sortColumn + " " + sortColumnDirection);
-                }
-                if (!string.IsNullOrEmpty(searchValue))
-                {
-                    categoryData = categoryData.Where(m => m.Name.Contains(searchValue));
-                }
-                var data = categoryData.Skip(skip).Take(pageSize).ToList();
-                recordsTotal = data.Count();
-                var jsonData = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data };
+                    PageSize = pageSize,
+                    SearchValue = searchValue,
+                    Skip = skip,
+                    SortColumn = sortColumn,
+                    SortColumnDirection = sortColumnDirection
+                };
+
+                int recordsTotal = await _categoryService.CountAllCategories();
+                var data = await _categoryService.GetFilteredCategories(filter);
+                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data };
                 return Ok(jsonData);
 
             }
@@ -187,6 +189,64 @@ namespace BookCatalog.Web.Controllers
             {
                 throw;
             }
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var catEntity = await _categoryService.GetCategoryById(id.Value);
+
+            if (catEntity == null)
+            {
+                return NotFound();
+            }
+
+            var catDetailsBindModel = new CategoryDetailsBindingModel
+            {
+                Id = catEntity.Id,
+                Name = catEntity.Name
+            };
+
+            var model = new CategoryDetailsViewModel
+            {
+                Category = catDetailsBindModel
+            };
+
+            return View(model);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var category = await _categoryService.GetCategoryById(id);
+            if (category == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (await _categoryService.DeleteCategory(category) < 1)
+            {
+                ModelState.AddModelError("", "Unable to delete the category. " +
+                    "Check if some book is related to the category.");
+
+                var catDetailsBindModel = new CategoryDetailsBindingModel
+                {
+                    Id = category.Id,
+                    Name = category.Name
+                };
+
+                return View(new CategoryDetailsViewModel
+                {
+                    Category = catDetailsBindModel
+                });
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
