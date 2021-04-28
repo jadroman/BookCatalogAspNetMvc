@@ -25,24 +25,14 @@ namespace BookCatalog.Domain.Services
             _bookContext = bookContext;
         }
 
-        public Task<List<Category>> GetAllCategories()
-        {
-            return _bookContext.Categories.ToListAsync();
-        }
-
         public Task<int> CountAllCategories()
         {
-            return  _bookContext.Categories.CountAsync();
-        }
-
-        public DbSet<Category> GetAllCategories2()
-        {
-            return _bookContext.Categories;
+            return  _bookContext.Categories.AsNoTracking().CountAsync();
         }
 
         public async Task<List<Category>> GetFilteredCategories(GridFilter filter)
         {
-            var categoryData = (IQueryable<Category>) _bookContext.Categories;
+            var categoryData = (IQueryable<Category>) _bookContext.Categories.AsNoTracking();
 
             if (!(string.IsNullOrEmpty(filter.SortColumn) && string.IsNullOrEmpty(filter.SortColumnDirection)))
             {

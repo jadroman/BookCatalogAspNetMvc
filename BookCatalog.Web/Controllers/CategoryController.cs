@@ -27,25 +27,9 @@ namespace BookCatalog.Web.Controllers
             _categoryService = categoryService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var model = new CategoryListViewModel();
-            var catListBindModel = new List<CategoryListBindingModel>();
-            var catEntities = await _categoryService.GetAllCategories();
-
-            foreach (var item in catEntities)
-            {
-                var cat = new CategoryListBindingModel
-                {
-                    Id = item.Id,
-                    Name = item.Name
-                };
-                catListBindModel.Add(cat);
-            }
-
-            model.Categories = catListBindModel;
-
-            return View(model);
+            return View();
         }
 
         public async Task<IActionResult> Details(int? id)

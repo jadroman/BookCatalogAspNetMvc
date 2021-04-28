@@ -30,7 +30,7 @@ namespace BookCatalog.Web
         {
             services.AddControllersWithViews();
             services.AddDbContext<BookContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("BookCatalog")));
+                options.UseSqlServer(Configuration.GetConnectionString("BookCatalog")).EnableSensitiveDataLogging());
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IBookContext, BookContext>();
         }

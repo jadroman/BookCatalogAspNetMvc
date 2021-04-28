@@ -13,14 +13,14 @@
                 <span asp-validation-for="Category.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-outline-secondary  btn-sm" />
+                <a class='btn btn-outline-secondary btn-sm' asp-action="Index">Back to List</a>
+                <input type="submit" value="Save" class="btn btn-outline-success  btn-sm" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
