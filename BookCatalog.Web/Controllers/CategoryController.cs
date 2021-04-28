@@ -2,7 +2,7 @@
 using BookCatalog.Contracts.Entities;
 using BookCatalog.Contracts.Interfaces;
 using BookCatalog.Web.Models;
-using BookCatalog.Web.Models.ViewModels;
+using BookCatalog.Web.Models.ViewModels.Category;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 using BookCatalog.Contracts.Helpers;
+using BookCatalog.Contracts.BindingModels.Category;
 
 namespace BookCatalog.Web.Controllers
 {

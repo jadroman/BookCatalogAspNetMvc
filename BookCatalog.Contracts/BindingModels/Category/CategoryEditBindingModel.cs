@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookCatalog.Contracts.BindingModels
+namespace BookCatalog.Contracts.BindingModels.Category
 {
     public class CategoryEditBindingModel
     {

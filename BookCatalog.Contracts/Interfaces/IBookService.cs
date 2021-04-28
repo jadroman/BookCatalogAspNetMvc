@@ -1,4 +1,5 @@
 ﻿using BookCatalog.Contracts.BindingModels;
+using BookCatalog.Contracts.BindingModels.Book;
 using BookCatalog.Contracts.BindingModels.Category;
 using BookCatalog.Contracts.Entities;
 using BookCatalog.Contracts.Helpers;
@@ -11,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace BookCatalog.Contracts.Interfaces
 {
-    public interface ICategoryService
+    public interface IBookService
     {
-        Task<Category> GetCategoryById(int id);
-        Task<int> SaveCategory(CategoryEditBindingModel category);
-        Task<List<Category>> GetFilteredCategories(GridFilter filter);
-        Task<int> CountAllCategories();
-        Task<int> DeleteCategory(Category category);
+        Task<Book> GetBookById(int id);
+        Task<int> SaveBook(BookEditBindingModel book);
+        Task<List<Book>> GetFilteredBooks(GridFilter filter);
+        Task<int> CountAllBooks();
+        Task<int> DeleteBook(Book book);
     }
 }

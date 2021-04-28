@@ -13,8 +13,10 @@ namespace BookCatalog.Contracts.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required]
         [StringLength(48)]
         public string Name { get; set; }
+
         public IEnumerable<Book> Books { get; set; }
     }
 }

@@ -14,8 +14,8 @@ namespace BookCatalog.DAL
     {
         public static void Initialize(IApplicationBuilder app)
         {
-            BookContext context = app.ApplicationServices
-                .CreateScope().ServiceProvider.GetRequiredService<BookContext>();
+            var context = app.ApplicationServices
+                .CreateScope().ServiceProvider.GetRequiredService<BookCatalogContext>();
 
             context.Database.EnsureCreated();
 
@@ -43,9 +43,39 @@ namespace BookCatalog.DAL
 
                 var books = new Book[]
                 {
-                    new Book{ Title = "title1", Author = "autor1", Category = categ1 },
-                    new Book{ Title = "title2", Author = "autor2", Category = categ2 },
-                    new Book{ Title = "title3", Author = "autor3", Category = categ3 },
+                    new Book
+                    {
+                        Title = "title1",
+                        Author = "autor1",
+                        Collection = "coll1",
+                        Note = "note1",
+                        Publisher = "publ1",
+                        Read = false,
+                        Year = 1981,
+                        Category = categ1
+                    },
+                    new Book
+                    {
+                        Title = "title2",
+                        Author = "autor2",
+                        Collection = "coll2",
+                        Note = "note2",
+                        Publisher = "publ2",
+                        Read = false,
+                        Year = 1982,
+                        Category = categ2
+                    },
+                    new Book
+                    {
+                        Title = "title3",
+                        Author = "autor3",
+                        Collection = "coll3",
+                        Note = "note3",
+                        Publisher = "publ3",
+                        Read = true,
+                        Year = 1983,
+                        Category = categ3
+                    }
                 };
 
                 foreach (Book book in books)

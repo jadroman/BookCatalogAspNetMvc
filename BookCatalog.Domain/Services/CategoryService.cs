@@ -12,27 +12,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 using System.Linq;
+using BookCatalog.Contracts.BindingModels.Category;
 
 namespace BookCatalog.Domain.Services
 {
     public class CategoryService : ICategoryService
     {
-        //private readonly ICategoryRepository _categoryRepository;
-        private readonly IBookContext _bookContext;
+        private readonly IBookCatalogContext _context;
 
-        public CategoryService(IBookContext bookContext)
+        public CategoryService(IBookCatalogContext context)
         {
-            _bookContext = bookContext;
+            _context = context;
         }
 
         public Task<int> CountAllCategories()
         {
-            return  _bookContext.Categories.AsNoTracking().CountAsync();
+            return  _context.Categories.AsNoTracking().CountAsync();
         }
 
         public async Task<List<Category>> GetFilteredCategories(GridFilter filter)
         {
-            var categoryData = (IQueryable<Category>) _bookContext.Categories.AsNoTracking();
+            var categoryData = (IQueryable<Category>) _context.Categories.AsNoTracking();
 
             if (!(string.IsNullOrEmpty(filter.SortColumn) && string.IsNullOrEmpty(filter.SortColumnDirection)))
             {
@@ -48,7 +48,7 @@ namespace BookCatalog.Domain.Services
 
         public async Task<Category> GetCategoryById(int id)
         {
-            var category = await _bookContext.Categories
+            var category = await _context.Categories
                  .AsNoTracking()
                  .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -65,14 +65,14 @@ namespace BookCatalog.Domain.Services
 
             if (category.Id == 0)
             {
-                await _bookContext.Categories.AddAsync(category);
+                await _context.Categories.AddAsync(category);
             }
             else
             {
-                _bookContext.Update(category);
+                _context.Update(category);
             }
 
-            return await _bookContext.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
 
 
@@ -82,9 +82,9 @@ namespace BookCatalog.Domain.Services
             {
 
 
-                _bookContext.Categories.Remove(category);
+                _context.Categories.Remove(category);
 
-                return await _bookContext.SaveChangesAsync();
+                return await _context.SaveChangesAsync();
             }
             catch (Exception)
             {

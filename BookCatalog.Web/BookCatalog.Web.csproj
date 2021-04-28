@@ -21,4 +21,11 @@
     <ProjectReference Include="..\BookCatalog.Domain\BookCatalog.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Book\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

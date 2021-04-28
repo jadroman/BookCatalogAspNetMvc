@@ -29,10 +29,11 @@ namespace BookCatalog.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<BookContext>(options =>
+            services.AddDbContext<BookCatalogContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BookCatalog")).EnableSensitiveDataLogging());
             services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IBookContext, BookContext>();
+            services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IBookCatalogContext, BookCatalogContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

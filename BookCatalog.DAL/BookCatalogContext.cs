@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 namespace BookCatalog.DAL
 {
-    public class BookContext : DbContext, IBookContext
+    public class BookCatalogContext : DbContext, IBookCatalogContext
     {
-        public BookContext(DbContextOptions<BookContext> options) : base(options)
+        public BookCatalogContext(DbContextOptions<BookCatalogContext> options) : base(options)
         {
         }
 

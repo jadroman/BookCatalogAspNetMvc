@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BookCatalog.Contracts.Interfaces
 {
-    public interface IBookContext
+    public interface IBookCatalogContext
     {
         DbSet<Book> Books { get; }
         DbSet<Category> Categories { get; }

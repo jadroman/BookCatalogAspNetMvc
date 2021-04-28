@@ -1,16 +1,16 @@
-﻿@model BookCatalog.Web.Models.ViewModels.Category.CategoryEditViewModel
+﻿@model BookCatalog.Web.Models.ViewModels.Book.BookEditViewModel
 
-<h1 style="margin-bottom:20px;margin-top: 5px">Edit category details</h1>
+<h1 style="margin-bottom:20px;margin-top: 5px">Edit book details</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Category.Id" />
+            <input type="hidden" asp-for="Book.Id" />
             <div class="form-group">
-                <label asp-for="Category.Name" class="control-label"></label>
-                <input asp-for="Category.Name" class="form-control" />
-                <span asp-validation-for="Category.Name" class="text-danger"></span>
+                <label asp-for="Book.Title" class="control-label"></label>
+                <input asp-for="Book.Title" class="form-control" />
+                <span asp-validation-for="Book.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <a class='btn btn-outline-secondary btn-sm' asp-action="Index">Back to List</a>

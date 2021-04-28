@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BookCatalog.Web</title>
+    <title>Book catalog</title>
     <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -19,10 +19,10 @@
                 <div class="collapse navbar-collapse" id="navbarsExample03">
                     <ul class="navbar-nav me-auto mb-2 mb-sm-0">
                         <li class="@Html.IsSelected("Book", "index")">
-                            <a class="nav-link" aria-current="page" asp-controller="Book" asp-action="Index">Book</a>
+                            <a class="nav-link" aria-current="page" asp-controller="Book" asp-action="Index">Books</a>
                         </li>
                         <li class="@Html.IsSelected("Category", "index")">
-                            <a class="nav-link" asp-controller="Category" asp-action="Index">Category</a>
+                            <a class="nav-link" asp-controller="Category" asp-action="Index">Categories</a>
                         </li>
                     </ul>
                 </div>
@@ -38,9 +38,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - BookCatalog.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+        <div class="container">BookCatalog</div>
     </footer>
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>

@@ -2,7 +2,7 @@
 
 namespace BookCatalog.DAL.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace BookCatalog.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(48)", maxLength: 48, nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(48)", maxLength: 48, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,9 +25,14 @@ namespace BookCatalog.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: true),
+                    Publisher = table.Column<string>(type: "nvarchar(56)", maxLength: 56, nullable: true),
+                    Author = table.Column<string>(type: "nvarchar(56)", maxLength: 56, nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Collection = table.Column<string>(type: "nvarchar(56)", maxLength: 56, nullable: true),
+                    Read = table.Column<bool>(type: "bit", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
