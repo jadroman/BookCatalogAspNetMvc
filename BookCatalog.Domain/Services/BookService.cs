@@ -50,7 +50,7 @@ namespace BookCatalog.Domain.Services
 
         public async Task<Book> GetBookById(int id)
         {
-            var book = await _context.Books
+            var book = await _context.Books.Include(b => b.Category)
                  .AsNoTracking()
                  .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -64,7 +64,7 @@ namespace BookCatalog.Domain.Services
                 Id = bookBinding.Id,
                 Author = bookBinding.Author,
                 Title = bookBinding.Title,
-                Category = await _context.Categories.AsNoTracking().FirstOrDefaultAsync(c=>c.Id == bookBinding.Category.Id),
+                //Category = await _context.Categories.AsNoTracking().FirstOrDefaultAsync(c=>c.Id == bookBinding.Category.Id),
                 Collection = bookBinding.Collection,
                 Note = bookBinding.Note,
                 Publisher = bookBinding.Publisher,

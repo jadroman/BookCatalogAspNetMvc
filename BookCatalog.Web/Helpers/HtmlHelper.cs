@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,25 @@ namespace BookCatalog.Web.Helpers
             return acceptedControllers.Contains(currentController) ?
                 cssClass : "nav-item";
         }
+
+        public static string AlreadReadDetail(this IHtmlHelper _, bool? read)
+        {
+            string returnString = "Not defined";
+            
+            if(read != null)
+            {
+                if (read.Value)
+                {
+                    returnString = "Yes";
+                }
+                else
+                {
+                    returnString = "No";
+                }
+            }
+
+            return returnString;
+        }
+
     }
 }

@@ -31,7 +31,7 @@ namespace BookCatalog.Contracts.BindingModels.Book
         public string Collection { get; set; }
 
         [Display(Name = "Already read")]
-        public bool? Read { get; set; }
+        public bool Read { get; set; }
 
         public CategoryDetailsBindingModel Category { get; set; }
     }

@@ -57,9 +57,9 @@ namespace BookCatalog.Web.Controllers
                 Collection = bookEntity.Collection,
                 Note = bookEntity.Note,
                 Publisher = bookEntity.Publisher,
-                Read = bookEntity.Read.Value,
+                Read = bookEntity.Read,
                 Year = bookEntity.Year,
-                //Category = new CategoryDetailsBindingModel { Id = bookEntity.Category.Id, Name = bookEntity.Category.Name }
+                Category = new CategoryDetailsBindingModel { Id = bookEntity.Category?.Id, Name = bookEntity.Category?.Name }
             };
 
             var model = new BookDetailsViewModel
@@ -92,9 +92,9 @@ namespace BookCatalog.Web.Controllers
                 Collection = bookEntity.Collection,
                 Note = bookEntity.Note,
                 Publisher = bookEntity.Publisher,
-                Read = bookEntity.Read.Value,
+                Read = bookEntity.Read,
                 Year = bookEntity.Year,
-                //Category = new CategoryDetailsBindingModel { Id = bookEntity.Category.Id, Name = bookEntity.Category.Name }
+                Category = new CategoryDetailsBindingModel { Id = bookEntity.Category?.Id, Name = bookEntity.Category?.Name }
             };
 
             var model = new BookEditViewModel
@@ -211,9 +211,9 @@ namespace BookCatalog.Web.Controllers
                 Collection = bookEntity.Collection,
                 Note = bookEntity.Note,
                 Publisher = bookEntity.Publisher,
-                Read = bookEntity.Read.Value,
+                Read = bookEntity.Read,
                 Year = bookEntity.Year,
-                //Category = new CategoryDetailsBindingModel { Id = bookEntity.Category.Id, Name = bookEntity.Category.Name }
+                Category = new CategoryDetailsBindingModel { Id = bookEntity.Category?.Id, Name = bookEntity.Category?.Name }
             };
 
             var model = new BookDetailsViewModel
@@ -246,9 +246,9 @@ namespace BookCatalog.Web.Controllers
                     Collection = book.Collection,
                     Note = book.Note,
                     Publisher = book.Publisher,
-                    Read = book.Read.Value,
+                    Read = book.Read,
                     Year = book.Year,
-                    //Category = new CategoryDetailsBindingModel { Id = book.Category.Id, Name = book.Category.Name }
+                    Category = new CategoryDetailsBindingModel { Id = book.Category.Id, Name = book.Category.Name }
                 };
 
                 return View(new BookDetailsViewModel

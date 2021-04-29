@@ -8,7 +8,7 @@ namespace BookCatalog.Contracts.BindingModels.Category
 {
     public class CategoryDetailsBindingModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
     }
 }

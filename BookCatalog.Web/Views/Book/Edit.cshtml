@@ -7,10 +7,35 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Book.Id" />
-            <div class="form-group">
+            <div class="form-group" style="">
                 <label asp-for="Book.Title" class="control-label"></label>
                 <input asp-for="Book.Title" class="form-control" />
                 <span asp-validation-for="Book.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Author" class="control-label"></label>
+                <input asp-for="Book.Author" class="form-control" />
+                <span asp-validation-for="Book.Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Publisher" class="control-label"></label>
+                <input asp-for="Book.Publisher" class="form-control" />
+                <span asp-validation-for="Book.Publisher" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Collection" class="control-label"></label>
+                <input asp-for="Book.Collection" class="form-control" />
+                <span asp-validation-for="Book.Collection" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Read" class="control-label"></label>
+                <input type="checkbox"  asp-for="Book.Read" class="form-control"  style="width:10px"/>
+                <span asp-validation-for="Book.Read" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Note" class="control-label"></label>
+                <textarea asp-for="Book.Note" class="form-control"></textarea>
+                <span asp-validation-for="Book.Note" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <a class='btn btn-outline-secondary btn-sm' asp-action="Index">Back to List</a>
