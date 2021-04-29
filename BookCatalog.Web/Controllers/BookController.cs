@@ -16,6 +16,7 @@ using BookCatalog.Contracts.Helpers;
 using BookCatalog.Contracts.BindingModels.Category;
 using BookCatalog.Contracts.BindingModels.Book;
 using BookCatalog.Web.Models.ViewModels.Book;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookCatalog.Web.Controllers
 {
@@ -94,13 +95,15 @@ namespace BookCatalog.Web.Controllers
                 Publisher = bookEntity.Publisher,
                 Read = bookEntity.Read,
                 Year = bookEntity.Year,
-                Category = new CategoryDetailsBindingModel { Id = bookEntity.Category?.Id, Name = bookEntity.Category?.Name }
+                Category = new CategoryDetailsBindingModel { Id = bookEntity.Category?.Id, Name = bookEntity.Category?.Name },
             };
 
             var model = new BookEditViewModel
             {
                 Book = bookEditBindModel
             };
+
+            ViewData["AllCategories"] = new SelectList(await _bookService.GetAllCategories(), "Id", "Name", bookEntity.Category?.Id);
 
             return View(model);
         }
@@ -131,8 +134,9 @@ namespace BookCatalog.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewData["AllCategories"] = new SelectList(await _bookService.GetAllCategories(), "Id", "Name");
             return View();
         }
 

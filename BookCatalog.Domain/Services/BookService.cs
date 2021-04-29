@@ -1,18 +1,13 @@
 ﻿
-using BookCatalog.Contracts.BindingModels;
 using BookCatalog.Contracts.Entities;
 using BookCatalog.Contracts.Helpers;
 using BookCatalog.Contracts.Interfaces;
-using BookCatalog.DAL;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-//using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 using System.Linq;
-using BookCatalog.Contracts.BindingModels.Category;
 using BookCatalog.Contracts.BindingModels.Book;
 
 namespace BookCatalog.Domain.Services
@@ -64,7 +59,7 @@ namespace BookCatalog.Domain.Services
                 Id = bookBinding.Id,
                 Author = bookBinding.Author,
                 Title = bookBinding.Title,
-                //Category = await _context.Categories.AsNoTracking().FirstOrDefaultAsync(c=>c.Id == bookBinding.Category.Id),
+                Category = await _context.Categories.FirstOrDefaultAsync(c=>c.Id == bookBinding.Category.Id),
                 Collection = bookBinding.Collection,
                 Note = bookBinding.Note,
                 Publisher = bookBinding.Publisher,
@@ -84,19 +79,23 @@ namespace BookCatalog.Domain.Services
             return await _context.SaveChangesAsync();
         }
 
-
         public async Task<int> DeleteBook(Book book)
         {
             try
             {
                 _context.Books.Remove(book);
-
                 return await _context.SaveChangesAsync();
             }
             catch (Exception)
             {
                 return await Task.FromResult(0);
             }
+        }
+
+
+        public Task<List<Category>> GetAllCategories()
+        {
+            return _context.Categories.AsNoTracking().ToListAsync();
         }
     }
 }
