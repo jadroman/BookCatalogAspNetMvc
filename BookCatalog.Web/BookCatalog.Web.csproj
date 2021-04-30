@@ -19,6 +19,7 @@
     <ProjectReference Include="..\BookCatalog.Contracts\BookCatalog.Contracts.csproj" />
     <ProjectReference Include="..\BookCatalog.DAL\BookCatalog.DAL.csproj" />
     <ProjectReference Include="..\BookCatalog.Domain\BookCatalog.Domain.csproj" />
+    <ProjectReference Include="..\DataMigration\DataMigration.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -80,8 +80,6 @@ namespace BookCatalog.Domain.Services
         {
             try
             {
-
-
                 _context.Categories.Remove(category);
 
                 return await _context.SaveChangesAsync();
