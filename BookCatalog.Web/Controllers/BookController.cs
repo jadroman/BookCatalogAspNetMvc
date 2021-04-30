@@ -33,6 +33,9 @@ namespace BookCatalog.Web.Controllers
 
         public IActionResult Index()
         {
+
+            //_logger.LogError(e, "neka tamo greška");
+
             return View();
         }
 
