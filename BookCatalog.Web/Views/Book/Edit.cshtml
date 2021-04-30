@@ -9,39 +9,39 @@
             <input type="hidden" asp-for="Book.Id" />
             <div class="form-group" style="">
                 <label asp-for="Book.Title" class="control-label"></label>
-                <input asp-for="Book.Title" class="form-control" />
+                <input asp-for="Book.Title" class="form-control form-control-sm" />
                 <span asp-validation-for="Book.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Book.Author" class="control-label"></label>
-                <input asp-for="Book.Author" class="form-control" />
+                <input asp-for="Book.Author" class="form-control form-control-sm" />
                 <span asp-validation-for="Book.Author" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Book.Category.Id" class="control-label"></label>
-                <select asp-for="Book.Category.Id" class="form-control" asp-items="ViewBag.AllCategories">
+                <select asp-for="Book.Category.Id" class="form-control form-control-sm" asp-items="ViewBag.AllCategories">
                     <option value="">-- Select Category --</option>
                 </select>
                 <span asp-validation-for="Book.Category.Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Book.Publisher" class="control-label"></label>
-                <input asp-for="Book.Publisher" class="form-control" />
+                <input asp-for="Book.Publisher" class="form-control form-control-sm" />
                 <span asp-validation-for="Book.Publisher" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Book.Collection" class="control-label"></label>
-                <input asp-for="Book.Collection" class="form-control" />
+                <input asp-for="Book.Collection" class="form-control form-control-sm" />
                 <span asp-validation-for="Book.Collection" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Book.Read" class="control-label"></label>
-                <input type="checkbox" asp-for="Book.Read" class="form-control" style="width:10px" />
+                <input type="checkbox" asp-for="Book.Read" class="form-control form-control-sm" style="width:10px" />
                 <span asp-validation-for="Book.Read" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Book.Note" class="control-label"></label>
-                <textarea asp-for="Book.Note" class="form-control"></textarea>
+                <textarea asp-for="Book.Note" class="form-control form-control-sm"></textarea>
                 <span asp-validation-for="Book.Note" class="text-danger"></span>
             </div>
             <div class="form-group">
