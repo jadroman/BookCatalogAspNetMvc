@@ -17,6 +17,8 @@ using BookCatalog.Contracts.BindingModels.Category;
 using BookCatalog.Contracts.BindingModels.Book;
 using BookCatalog.Web.Models.ViewModels.Book;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NToastNotify;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace BookCatalog.Web.Controllers
 {
@@ -24,6 +26,7 @@ namespace BookCatalog.Web.Controllers
     {
         private readonly ILogger<BookController> _logger;
         private readonly IBookService _bookService;
+
 
         public BookController(ILogger<BookController> logger, IBookService bookService)
         {
@@ -33,9 +36,6 @@ namespace BookCatalog.Web.Controllers
 
         public IActionResult Index()
         {
-
-            //_logger.LogError(e, "neka tamo greška");
-
             return View();
         }
 

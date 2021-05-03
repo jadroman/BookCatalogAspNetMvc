@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NToastNotify;
 
 namespace BookCatalog.Web
 {
@@ -20,7 +22,6 @@ namespace BookCatalog.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
@@ -28,11 +29,13 @@ namespace BookCatalog.Web
                 options.UseSqlServer(Configuration.GetConnectionString("BookCatalog")).EnableSensitiveDataLogging());
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IBookService, BookService>();
-            services.AddScoped<IBookCatalogContext, BookCatalogContext>();
+            services.AddScoped<IBookCatalogContext, BookCatalogContext>(); 
+            services.AddSingleton<ILogger, Logger<Startup>>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger logger)
         {
             if (env.IsDevelopment())
             {
@@ -40,8 +43,9 @@ namespace BookCatalog.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
             }
+
             app.UseStaticFiles();
 
             app.UseRouting();
