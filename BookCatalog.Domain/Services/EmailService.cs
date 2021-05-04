@@ -15,12 +15,11 @@ namespace BookCatalog.Domain.Services
 
         public EmailService()
         {
-
             _smtpClient = new SmtpClient
             {
                 Host = "smtp.gmail.com",
                 Port = 587,
-                Credentials = new NetworkCredential("jadrangrba@gmail.com", "vezica526247"),
+                Credentials = new NetworkCredential("jadrangrbaapp@gmail.com", "xX12345!"),
                 EnableSsl = true
             };
         }
@@ -30,7 +29,7 @@ namespace BookCatalog.Domain.Services
 
             var mail = new MailMessage
             {
-                From = new MailAddress("jadrangrba@gmail.com"),
+                From = new MailAddress("jadrangrbaapp@gmail.com"),
                 Subject = subject,
                 Body = htmlMessage,
                 IsBodyHtml = true
