@@ -12,10 +12,12 @@ namespace BookCatalog.Web.Helpers
         public static string IsSelected(this IHtmlHelper htmlHelper, string controllers, string actions, string cssClass = "nav-item active")
         {
             string currentController = htmlHelper.ViewContext.RouteData.Values["controller"] as string;
+            string currentPage = htmlHelper.ViewContext.RouteData.Values["page"] as string;
 
             IEnumerable<string> acceptedControllers = (controllers ?? currentController).Split(',');
+            IEnumerable<string> acceptedPages = (actions ?? currentPage).Split(',');
 
-            return acceptedControllers.Contains(currentController) ?
+            return acceptedControllers.Contains(currentController) || acceptedPages.Contains(currentPage) ?
                 cssClass : "nav-item";
         }
 

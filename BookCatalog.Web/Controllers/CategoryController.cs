@@ -1,22 +1,18 @@
-﻿using BookCatalog.Contracts.BindingModels;
-using BookCatalog.Contracts.Entities;
-using BookCatalog.Contracts.Interfaces;
-using BookCatalog.Web.Models;
+﻿using BookCatalog.Contracts.Interfaces;
 using BookCatalog.Web.Models.ViewModels.Category;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 using BookCatalog.Contracts.Helpers;
 using BookCatalog.Contracts.BindingModels.Category;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookCatalog.Web.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ILogger<CategoryController> _logger;

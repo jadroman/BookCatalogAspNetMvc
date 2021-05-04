@@ -25,6 +25,7 @@ namespace BookCatalog.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddDbContext<BookCatalogContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BookCatalog")).EnableSensitiveDataLogging());
             services.AddScoped<ICategoryService, CategoryService>();
@@ -50,6 +51,7 @@ namespace BookCatalog.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -58,6 +60,7 @@ namespace BookCatalog.Web
                     name: "default",
                     pattern: "{controller}/{action}/{id?}",
                     defaults: new { controller = "Book", action = "index" });
+                endpoints.MapRazorPages();
             });
 
             //DbInitializer.Initialize(app);

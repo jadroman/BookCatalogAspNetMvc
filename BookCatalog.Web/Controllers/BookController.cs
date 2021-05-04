@@ -19,9 +19,11 @@ using BookCatalog.Web.Models.ViewModels.Book;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NToastNotify;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookCatalog.Web.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
         private readonly ILogger<BookController> _logger;
