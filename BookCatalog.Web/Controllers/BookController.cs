@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using NToastNotify;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
+using BookCatalog.Domain.Services;
 
 namespace BookCatalog.Web.Controllers
 {
@@ -36,7 +37,7 @@ namespace BookCatalog.Web.Controllers
             _bookService = bookService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }

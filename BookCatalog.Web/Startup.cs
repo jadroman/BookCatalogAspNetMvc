@@ -4,12 +4,15 @@ using BookCatalog.DAL;
 using BookCatalog.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NToastNotify;
+using System;
 
 namespace BookCatalog.Web
 {
@@ -30,9 +33,9 @@ namespace BookCatalog.Web
                 options.UseSqlServer(Configuration.GetConnectionString("BookCatalog")).EnableSensitiveDataLogging());
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IBookService, BookService>();
-            services.AddScoped<IBookCatalogContext, BookCatalogContext>(); 
+            services.AddScoped<IBookCatalogContext, BookCatalogContext>();
+            services.AddScoped<IEmailSender, EmailService>();
             services.AddSingleton<ILogger, Logger<Startup>>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
