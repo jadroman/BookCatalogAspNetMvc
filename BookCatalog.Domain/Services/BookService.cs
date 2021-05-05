@@ -92,10 +92,9 @@ namespace BookCatalog.Domain.Services
             }
         }
 
-
         public Task<List<Category>> GetAllCategories()
         {
-            return _context.Categories.AsNoTracking().ToListAsync();
+            return _context.Categories.OrderBy(b=>b.Name).AsNoTracking().ToListAsync();
         }
     }
 }

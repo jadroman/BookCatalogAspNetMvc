@@ -17,6 +17,7 @@ namespace BookCatalog.Contracts.Interfaces
         Task<int> SaveCategory(CategoryEditBindingModel category);
         Task<List<Category>> GetFilteredCategories(GridFilter filter);
         Task<int> CountAllCategories();
-        Task<int> DeleteCategory(Category category);
+        Task<Result<int>> DeleteCategory(Category category);
+        Task<Category> GetCategoryByIdWithBooks(int id);
     }
 }

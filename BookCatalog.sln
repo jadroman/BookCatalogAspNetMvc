@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalog.Domain", "BookC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalog.Contracts", "BookCatalog.Contracts\BookCatalog.Contracts.csproj", "{77C0EC32-3E2E-4EA5-BF70-ABB66288C6E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMigration", "DataMigration\DataMigration.csproj", "{149CDC1C-27D2-45BE-B2B7-B54D99642403}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMigration", "DataMigration\DataMigration.csproj", "{149CDC1C-27D2-45BE-B2B7-B54D99642403}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalog.Tests", "BookCatalog.Tests\BookCatalog.Tests.csproj", "{98BAF447-41A0-4FFE-9734-937AEC53DE7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{149CDC1C-27D2-45BE-B2B7-B54D99642403}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{149CDC1C-27D2-45BE-B2B7-B54D99642403}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{149CDC1C-27D2-45BE-B2B7-B54D99642403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98BAF447-41A0-4FFE-9734-937AEC53DE7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98BAF447-41A0-4FFE-9734-937AEC53DE7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98BAF447-41A0-4FFE-9734-937AEC53DE7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98BAF447-41A0-4FFE-9734-937AEC53DE7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

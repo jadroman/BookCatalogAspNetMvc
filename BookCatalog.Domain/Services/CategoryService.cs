@@ -7,7 +7,6 @@ using BookCatalog.DAL;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-//using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
@@ -55,6 +54,15 @@ namespace BookCatalog.Domain.Services
             return category;
         }
 
+        public async Task<Category> GetCategoryByIdWithBooks(int id)
+        {
+            var category = await _context.Categories.Include(c=>c.Books)
+                 .AsNoTracking()
+                 .FirstOrDefaultAsync(c => c.Id == id);
+
+            return category;
+        }
+
         public async Task<int> SaveCategory(CategoryEditBindingModel categoryBinding)
         {
             var category = new Category
@@ -76,18 +84,16 @@ namespace BookCatalog.Domain.Services
         }
 
 
-        public async Task<int> DeleteCategory(Category category)
+        public async Task<Result<int>> DeleteCategory(Category category)
         {
-            try
+            if (category.Books != null && category.Books.Any())
             {
-                _context.Categories.Remove(category);
+                return new InvalidResult<int>("There are some books related with this category.");
+            }
 
-                return await _context.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                return await Task.FromResult(0);
-            }
+            _context.Categories.Remove(category);
+
+            return new SuccessResult<int>(await _context.SaveChangesAsync());
         }
     }
 }

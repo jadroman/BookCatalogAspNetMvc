@@ -1,7 +1,4 @@
-﻿
-
-
-using BookCatalog.Contracts.Entities;
+﻿using BookCatalog.Contracts.Entities;
 using BookCatalog.Contracts.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

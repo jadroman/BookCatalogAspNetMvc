@@ -204,16 +204,17 @@ namespace BookCatalog.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _categoryService.GetCategoryById(id);
+            var category = await _categoryService.GetCategoryByIdWithBooks(id);
             if (category == null)
             {
                 return RedirectToAction(nameof(Index));
             }
 
-            if (await _categoryService.DeleteCategory(category) < 1)
+            var deleteCategResult = await _categoryService.DeleteCategory(category);
+
+            if (!deleteCategResult.IsSuccessful)
             {
-                ModelState.AddModelError("", "Unable to delete the category. " +
-                    "Check if some book is related to the category.");
+                ModelState.AddModelError("", deleteCategResult.Error);
 
                 var catDetailsBindModel = new CategoryDetailsBindingModel
                 {
