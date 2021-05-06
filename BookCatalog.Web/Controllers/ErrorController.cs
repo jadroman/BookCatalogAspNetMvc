@@ -20,7 +20,12 @@ namespace BookCatalog.Web.Controllers
         public IActionResult Index()
         {
             var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
-            _logger.LogError(context.Error?.StackTrace);
+
+            if (context != null && context.Error != null)
+            {
+                _logger.LogError(context.Error.StackTrace);
+                ViewBag.ErrorRecorded = "The error has been recorded!";
+            }
 
             return View();
         }

@@ -29,14 +29,9 @@ namespace BookCatalog.Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var catEntity = await _categoryService.GetCategoryById(id.Value);
+            var catEntity = await _categoryService.GetCategoryById(id);
 
             if (catEntity == null)
             {
@@ -57,14 +52,9 @@ namespace BookCatalog.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var catEntity = await _categoryService.GetCategoryById(id.Value);
+            var catEntity = await _categoryService.GetCategoryById(id);
 
             if (catEntity == null)
             {
@@ -172,14 +162,9 @@ namespace BookCatalog.Web.Controllers
             }
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var catEntity = await _categoryService.GetCategoryById(id.Value);
+            var catEntity = await _categoryService.GetCategoryById(id);
 
             if (catEntity == null)
             {
@@ -207,13 +192,14 @@ namespace BookCatalog.Web.Controllers
             var category = await _categoryService.GetCategoryByIdWithBooks(id);
             if (category == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
 
             var deleteCategResult = await _categoryService.DeleteCategory(category);
 
             if (!deleteCategResult.IsSuccessful)
             {
+                _logger.LogError(deleteCategResult.Error + $" Categori id = {id}");
                 ModelState.AddModelError("", deleteCategResult.Error);
 
                 var catDetailsBindModel = new CategoryDetailsBindingModel

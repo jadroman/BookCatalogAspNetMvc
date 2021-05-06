@@ -80,3 +80,8 @@ body {
 input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: searchfield-cancel-button;
 }
+
+table.table td,
+table.table th {
+    white-space: normal !important;
+}

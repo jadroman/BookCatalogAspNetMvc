@@ -28,7 +28,7 @@ namespace BookCatalog.Domain.Services
 
         public async Task<List<Book>> GetFilteredBooks(GridFilter filter)
         {
-            var bookData = (IQueryable<Book>) _context.Books.AsNoTracking();
+            var bookData = _context.Books.AsNoTracking();
 
             if (!(string.IsNullOrEmpty(filter.SortColumn) && string.IsNullOrEmpty(filter.SortColumnDirection)))
             {
