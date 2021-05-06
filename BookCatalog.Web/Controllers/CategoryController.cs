@@ -114,13 +114,7 @@ namespace BookCatalog.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (await _categoryService.SaveCategory(categoryBind.Category) < 1)
-                {
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                        "Try again, and if the problem persists, " +
-                        "see your system administrator.");
-                }
-
+                await _categoryService.SaveCategory(categoryBind.Category);
             }
             return RedirectToAction(nameof(Index));
         }

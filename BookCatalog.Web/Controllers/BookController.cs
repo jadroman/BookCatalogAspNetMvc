@@ -39,6 +39,7 @@ namespace BookCatalog.Web.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 
@@ -143,13 +144,7 @@ namespace BookCatalog.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (await _bookService.SaveBook(bookBind.Book) < 1)
-                {
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                        "Try again, and if the problem persists, " +
-                        "see your system administrator.");
-                }
-
+                await _bookService.SaveBook(bookBind.Book);
             }
             return RedirectToAction(nameof(Index));
         }
