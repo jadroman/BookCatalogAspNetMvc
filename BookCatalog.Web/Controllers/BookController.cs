@@ -1,14 +1,8 @@
 ﻿using BookCatalog.Contracts.BindingModels;
-using BookCatalog.Contracts.Entities;
 using BookCatalog.Contracts.Interfaces;
-using BookCatalog.Web.Models;
-using BookCatalog.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
@@ -17,10 +11,7 @@ using BookCatalog.Contracts.BindingModels.Category;
 using BookCatalog.Contracts.BindingModels.Book;
 using BookCatalog.Web.Models.ViewModels.Book;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using NToastNotify;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
-using BookCatalog.Domain.Services;
 
 namespace BookCatalog.Web.Controllers
 {
