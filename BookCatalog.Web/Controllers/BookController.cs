@@ -30,7 +30,7 @@ namespace BookCatalog.Web.Controllers
 
         public IActionResult Index()
         {
-
+            throw new NullReferenceException();
             return View();
         }
 
