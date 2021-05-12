@@ -52,23 +52,24 @@ namespace BookCatalog.Domain.Services
             return book;
         }
 
-        public async Task<int> SaveBook(BookEditBindingModel bookBinding)
+        public async Task<Category> GetCategoryById(int id)
         {
-            var book = new Book
-            {
-                Id = bookBinding.Id,
-                Author = bookBinding.Author,
-                Title = bookBinding.Title,
-                Category = await _context.Categories.FirstOrDefaultAsync(c=>c.Id == bookBinding.Category.Id),
-                Collection = bookBinding.Collection,
-                Note = bookBinding.Note,
-                Publisher = bookBinding.Publisher,
-                Read = bookBinding.Read,
-                Year = bookBinding.Year
-            };
+            var category = await _context.Categories
+                 .AsNoTracking()
+                 .FirstOrDefaultAsync(c => c.Id == id);
 
+            return category;
+        }
+
+        public async Task<int> SaveBook(Book book)
+        {
             if (book.Id == 0)
             {
+                if(book.Category != null)
+                {
+
+                }
+
                 await _context.Books.AddAsync(book);
             }
             else

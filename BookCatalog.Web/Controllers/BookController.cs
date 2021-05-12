@@ -12,6 +12,7 @@ using BookCatalog.Contracts.BindingModels.Book;
 using BookCatalog.Web.Models.ViewModels.Book;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using BookCatalog.Contracts.Entities;
 
 namespace BookCatalog.Web.Controllers
 {
@@ -20,7 +21,6 @@ namespace BookCatalog.Web.Controllers
     {
         private readonly ILogger<BookController> _logger;
         private readonly IBookService _bookService;
-
 
         public BookController(ILogger<BookController> logger, IBookService bookService)
         {
@@ -109,7 +109,20 @@ namespace BookCatalog.Web.Controllers
                     return NotFound();
                 }
 
-                if (await _bookService.SaveBook(bookBind.Book) < 1)
+                var book = new Book
+                {
+                    Id = bookBind.Book.Id,
+                    Author = bookBind.Book.Author,
+                    Title = bookBind.Book.Title,
+                    Category = (bookBind.Book.Category.Id != null) ? await _bookService.GetCategoryById(bookBind.Book.Category.Id.Value) : null,
+                    Collection = bookBind.Book.Collection,
+                    Note = bookBind.Book.Note,
+                    Publisher = bookBind.Book.Publisher,
+                    Read = bookBind.Book.Read,
+                    Year = bookBind.Book.Year
+                };
+
+                if (await _bookService.SaveBook(book) < 1)
                 {
                     ModelState.AddModelError("", "Unable to save changes. " +
                         "Try again, and if the problem persists, " +
@@ -134,7 +147,20 @@ namespace BookCatalog.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _bookService.SaveBook(bookBind.Book);
+                var book = new Book
+                {
+                    Id = bookBind.Book.Id,
+                    Author = bookBind.Book.Author,
+                    Title = bookBind.Book.Title,
+                    Category = (bookBind.Book.Category.Id != null) ? await _bookService.GetCategoryById(bookBind.Book.Category.Id.Value) : null,
+                    Collection = bookBind.Book.Collection,
+                    Note = bookBind.Book.Note,
+                    Publisher = bookBind.Book.Publisher,
+                    Read = bookBind.Book.Read,
+                    Year = bookBind.Book.Year
+                };
+
+                await _bookService.SaveBook(book);
             }
             return RedirectToAction(nameof(Index));
         }
