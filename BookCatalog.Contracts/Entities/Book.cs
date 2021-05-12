@@ -32,6 +32,7 @@ namespace BookCatalog.Contracts.Entities
         public string? Collection { get; set; }
 
         public bool Read { get; set; }
+        public int? CategoryId { get; set; }
 
         public Category? Category { get; set; }
     }

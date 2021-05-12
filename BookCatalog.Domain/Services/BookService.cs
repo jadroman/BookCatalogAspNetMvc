@@ -65,11 +65,6 @@ namespace BookCatalog.Domain.Services
         {
             if (book.Id == 0)
             {
-                if(book.Category != null)
-                {
-
-                }
-
                 await _context.Books.AddAsync(book);
             }
             else

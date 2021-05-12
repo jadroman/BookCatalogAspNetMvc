@@ -82,7 +82,7 @@ namespace BookCatalog.Web.Controllers
                 Publisher = bookEntity.Publisher,
                 Read = bookEntity.Read,
                 Year = bookEntity.Year,
-                Category = new CategoryDetailsBindingModel { Id = bookEntity.Category?.Id, Name = bookEntity.Category?.Name },
+                CategoryId= bookEntity.CategoryId
             };
 
             var model = new BookEditViewModel
@@ -90,7 +90,7 @@ namespace BookCatalog.Web.Controllers
                 Book = bookEditBindModel
             };
 
-            ViewData["AllCategories"] = new SelectList(await _bookService.GetAllCategories(), "Id", "Name", bookEntity.Category?.Id);
+            ViewData["AllCategories"] = new SelectList(await _bookService.GetAllCategories(), "Id", "Name", bookEntity.CategoryId);
 
             return View(model);
         }
@@ -114,7 +114,7 @@ namespace BookCatalog.Web.Controllers
                     Id = bookBind.Book.Id,
                     Author = bookBind.Book.Author,
                     Title = bookBind.Book.Title,
-                    Category = (bookBind.Book.Category.Id != null) ? await _bookService.GetCategoryById(bookBind.Book.Category.Id.Value) : null,
+                    CategoryId = bookBind.Book.CategoryId,
                     Collection = bookBind.Book.Collection,
                     Note = bookBind.Book.Note,
                     Publisher = bookBind.Book.Publisher,
@@ -152,7 +152,7 @@ namespace BookCatalog.Web.Controllers
                     Id = bookBind.Book.Id,
                     Author = bookBind.Book.Author,
                     Title = bookBind.Book.Title,
-                    Category = (bookBind.Book.Category.Id != null) ? await _bookService.GetCategoryById(bookBind.Book.Category.Id.Value) : null,
+                    CategoryId = bookBind.Book.CategoryId,
                     Collection = bookBind.Book.Collection,
                     Note = bookBind.Book.Note,
                     Publisher = bookBind.Book.Publisher,
