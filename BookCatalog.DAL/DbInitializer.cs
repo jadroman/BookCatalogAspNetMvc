@@ -1,5 +1,5 @@
 ﻿
-using BookCatalog.Contracts.Entities;
+using BookCatalog.Common.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;

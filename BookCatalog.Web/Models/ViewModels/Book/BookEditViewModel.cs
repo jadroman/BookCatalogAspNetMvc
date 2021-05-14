@@ -1,6 +1,6 @@
-﻿using BookCatalog.Contracts.BindingModels;
-using BookCatalog.Contracts.BindingModels.Book;
-using BookCatalog.Contracts.BindingModels.Category;
+﻿using BookCatalog.Common.BindingModels;
+using BookCatalog.Common.BindingModels.Book;
+using BookCatalog.Common.BindingModels.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,14 +1,14 @@
 ﻿
-using BookCatalog.Contracts.Entities;
-using BookCatalog.Contracts.Helpers;
-using BookCatalog.Contracts.Interfaces;
+using BookCatalog.Common.Entities;
+using BookCatalog.Common.Helpers;
+using BookCatalog.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 using System.Linq;
-using BookCatalog.Contracts.BindingModels.Book;
+using BookCatalog.Common.BindingModels.Book;
 
 namespace BookCatalog.Domain.Services
 {

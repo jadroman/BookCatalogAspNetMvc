@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookCatalog.Contracts.Helpers
+namespace BookCatalog.Common.Helpers
 {
     public enum ResultType
     {

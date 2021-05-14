@@ -1,17 +1,16 @@
-﻿using System;
+﻿using BookCatalog.Common.BindingModels.Category;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookCatalog.Contracts.Entities
+namespace BookCatalog.Common.BindingModels.Book
 {
-    public class Book
+    public class BookEditBindingModel
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+         public int Id { get; set; }
 
         [Required]
         [StringLength(200)]
@@ -21,19 +20,20 @@ namespace BookCatalog.Contracts.Entities
         public int? Year { get; set; }
 
         [StringLength(56)]
-        public string? Publisher { get; set; }
+        public string Publisher { get; set; }
 
         [StringLength(56)]
-        public string? Author { get; set; }
+        public string Author { get; set; }
 
-        public string? Note { get; set; }
+        public string Note { get; set; }
 
         [StringLength(56)]
-        public string? Collection { get; set; }
+        public string Collection { get; set; }
 
+        [Display(Name = "Already read")]
         public bool Read { get; set; }
         public int? CategoryId { get; set; }
 
-        public Category? Category { get; set; }
+        //public CategoryDetailsBindingModel Category { get; set; }
     }
 }

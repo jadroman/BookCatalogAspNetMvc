@@ -1,4 +1,4 @@
-﻿using BookCatalog.Contracts.Interfaces;
+﻿using BookCatalog.Common.Interfaces;
 using BookCatalog.Web.Models.ViewModels.Category;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -6,8 +6,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
-using BookCatalog.Contracts.Helpers;
-using BookCatalog.Contracts.BindingModels.Category;
+using BookCatalog.Common.Helpers;
+using BookCatalog.Common.BindingModels.Category;
 using Microsoft.AspNetCore.Authorization;
 
 namespace BookCatalog.Web.Controllers

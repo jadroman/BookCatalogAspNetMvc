@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookCatalog.Contracts.Entities
+namespace BookCatalog.Common.Entities
 {
     public class Category
     {

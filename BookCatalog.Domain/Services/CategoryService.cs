@@ -1,8 +1,8 @@
 ﻿
-using BookCatalog.Contracts.BindingModels;
-using BookCatalog.Contracts.Entities;
-using BookCatalog.Contracts.Helpers;
-using BookCatalog.Contracts.Interfaces;
+using BookCatalog.Common.BindingModels;
+using BookCatalog.Common.Entities;
+using BookCatalog.Common.Helpers;
+using BookCatalog.Common.Interfaces;
 using BookCatalog.DAL;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 using System.Linq;
-using BookCatalog.Contracts.BindingModels.Category;
+using BookCatalog.Common.BindingModels.Category;
 
 namespace BookCatalog.Domain.Services
 {

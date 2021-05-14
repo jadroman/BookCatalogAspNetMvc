@@ -1,6 +1,6 @@
-﻿using BookCatalog.Contracts.Entities;
-using BookCatalog.Contracts.Helpers;
-using BookCatalog.Contracts.Interfaces;
+﻿using BookCatalog.Common.Entities;
+using BookCatalog.Common.Helpers;
+using BookCatalog.Common.Interfaces;
 using BookCatalog.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Moq;

@@ -1,18 +1,18 @@
-﻿using BookCatalog.Contracts.BindingModels;
-using BookCatalog.Contracts.Interfaces;
+﻿using BookCatalog.Common.BindingModels;
+using BookCatalog.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
-using BookCatalog.Contracts.Helpers;
-using BookCatalog.Contracts.BindingModels.Category;
-using BookCatalog.Contracts.BindingModels.Book;
+using BookCatalog.Common.Helpers;
+using BookCatalog.Common.BindingModels.Category;
+using BookCatalog.Common.BindingModels.Book;
 using BookCatalog.Web.Models.ViewModels.Book;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
-using BookCatalog.Contracts.Entities;
+using BookCatalog.Common.Entities;
 
 namespace BookCatalog.Web.Controllers
 {

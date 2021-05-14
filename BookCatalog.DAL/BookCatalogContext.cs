@@ -1,5 +1,5 @@
-﻿using BookCatalog.Contracts.Entities;
-using BookCatalog.Contracts.Interfaces;
+﻿using BookCatalog.Common.Entities;
+using BookCatalog.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 namespace BookCatalog.DAL

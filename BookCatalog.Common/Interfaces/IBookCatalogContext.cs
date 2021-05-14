@@ -1,4 +1,4 @@
-﻿using BookCatalog.Contracts.Entities;
+﻿using BookCatalog.Common.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BookCatalog.Contracts.Interfaces
+namespace BookCatalog.Common.Interfaces
 {
     public interface IBookCatalogContext
     {
