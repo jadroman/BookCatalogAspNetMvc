@@ -3,21 +3,33 @@
 <h1 style="margin-bottom:20px;margin-top: 5px">Edit category details</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Category.Id" />
-            <div class="form-group">
-                <label asp-for="Category.Name" class="control-label"></label>
-                <input asp-for="Category.Name" class="form-control form-control-sm" />
-                <span asp-validation-for="Category.Name" class="text-danger"></span>
+    <form asp-action="Edit" autocomplete="off" class="card card-body bg-light mt-5">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Category.Id" />
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="Category.Name" class="control-label"></label>
+                </div>
             </div>
-            <div class="form-group">
-                <a class='btn btn-outline-secondary btn-sm' asp-action="Index">Back to List</a>
-                <input type="submit" value="Save" class="btn btn-outline-success  btn-sm" />
+            <div class="row">
+                <div class="col-md-6">
+                    <input asp-for="Category.Name" class="form-control form-control-sm" />
+                    <span asp-validation-for="Category.Name" class="text-danger"></span>
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-auto">
+                    <a class='btn btn-outline-secondary' asp-action="Index">Back to List</a>
+                </div>
+                <div class="col-md-auto">
+                    <input type="submit" value="Save" class="btn btn-outline-success" />
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 <div>
