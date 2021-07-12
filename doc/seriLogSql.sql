@@ -1,6 +1,3 @@
-USE [BookCatalogWebApi]
-GO
-/****** Object:  Table [dbo].[Log]    Script Date: 26.6.2021. 14:13:21 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
