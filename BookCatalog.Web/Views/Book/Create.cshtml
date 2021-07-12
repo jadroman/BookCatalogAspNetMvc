@@ -3,57 +3,119 @@
 <h1 style="margin-bottom:20px;margin-top: 5px">New book</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Book.Title" class="control-label"></label>
-                <input asp-for="Book.Title" class="form-control form-control-sm" />
-                <span asp-validation-for="Book.Title" class="text-danger"></span>
+    <form asp-action="Create" class="card card-body bg-light mt-5">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="Book.Title" class="control-label"></label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Book.Author" class="control-label"></label>
-                <input asp-for="Book.Author" class="form-control form-control-sm" />
-                <span asp-validation-for="Book.Author" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <input asp-for="Book.Title" class="form-control" />
+                    <span asp-validation-for="Book.Title" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Book.Year" class="control-label"></label>
-                <input asp-for="Book.Year" class="form-control form-control-sm" />
-                <span asp-validation-for="Book.Year" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="Book.Author" class="control-label"></label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Book.CategoryId" class="control-label"></label>
-                <select asp-for="Book.CategoryId" class="form-control form-control-sm" asp-items="ViewBag.AllCategories">
-                    <option value="">-- Select Category --</option>
-                </select>
-                <span asp-validation-for="Book.CategoryId" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <input asp-for="Book.Author" class="form-control" />
+                    <span asp-validation-for="Book.Author" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Book.Publisher" class="control-label"></label>
-                <input asp-for="Book.Publisher" class="form-control form-control-sm" />
-                <span asp-validation-for="Book.Publisher" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="Book.Year" class="control-label"></label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Book.Collection" class="control-label"></label>
-                <input asp-for="Book.Collection" class="form-control form-control-sm" />
-                <span asp-validation-for="Book.Collection" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <input asp-for="Book.Year" class="form-control" />
+                    <span asp-validation-for="Book.Year" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Book.Read" class="control-label"></label>
-                <input type="checkbox" asp-for="Book.Read" class="form-control form-control-sm" style="width:10px" />
-                <span asp-validation-for="Book.Read" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="Book.CategoryId" class="control-label"></label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Book.Note" class="control-label"></label>
-                <textarea asp-for="Book.Note" class="form-control form-control-sm"></textarea>
-                <span asp-validation-for="Book.Note" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6">
+                    <select asp-for="Book.CategoryId" class="form-control" asp-items="ViewBag.AllCategories">
+                        <option value="">-- Select Category --</option>
+                    </select>
+                    <span asp-validation-for="Book.CategoryId" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <a class='btn btn-outline-secondary btn-sm' asp-action="Index">Back to List</a>
-                <input type="submit" value="Save" class="btn btn-outline-success btn-sm" />
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="Book.Publisher" class="control-label"></label>
+                </div>
             </div>
-        </form>
-    </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input asp-for="Book.Publisher" class="form-control" />
+                    <span asp-validation-for="Book.Publisher" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="Book.Collection" class="control-label"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input asp-for="Book.Collection" class="form-control" />
+                    <span asp-validation-for="Book.Collection" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="Book.Read" class="control-label"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="checkbox" asp-for="Book.Read" class="form-control" style="width:20px" />
+                    <span asp-validation-for="Book.Read" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="Book.Note" class="control-label"></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <textarea asp-for="Book.Note" class="form-control"></textarea>
+                    <span asp-validation-for="Book.Note" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <a class='btn btn-outline-secondary btn-sm' asp-action="Index">Back to List</a>
+            <input type="submit" value="Save" class="btn btn-outline-success" />
+        </div>
+    </form>
 </div>
 
 @section Scripts {
