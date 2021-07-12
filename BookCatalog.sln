@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalog.DAL", "BookCata
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalog.Domain", "BookCatalog.Domain\BookCatalog.Domain.csproj", "{30988E4A-5640-4418-B9F8-1402B33F943B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataMigration", "DataMigration\DataMigration.csproj", "{149CDC1C-27D2-45BE-B2B7-B54D99642403}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalog.Tests", "BookCatalog.Tests\BookCatalog.Tests.csproj", "{98BAF447-41A0-4FFE-9734-937AEC53DE7D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalog.Common", "BookCatalog.Common\BookCatalog.Common.csproj", "{ADDFD56A-4892-435D-939F-8C88B2E2D937}"
@@ -33,10 +31,6 @@ Global
 		{30988E4A-5640-4418-B9F8-1402B33F943B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30988E4A-5640-4418-B9F8-1402B33F943B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30988E4A-5640-4418-B9F8-1402B33F943B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{149CDC1C-27D2-45BE-B2B7-B54D99642403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{149CDC1C-27D2-45BE-B2B7-B54D99642403}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{149CDC1C-27D2-45BE-B2B7-B54D99642403}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{149CDC1C-27D2-45BE-B2B7-B54D99642403}.Release|Any CPU.Build.0 = Release|Any CPU
 		{98BAF447-41A0-4FFE-9734-937AEC53DE7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{98BAF447-41A0-4FFE-9734-937AEC53DE7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98BAF447-41A0-4FFE-9734-937AEC53DE7D}.Release|Any CPU.ActiveCfg = Release|Any CPU

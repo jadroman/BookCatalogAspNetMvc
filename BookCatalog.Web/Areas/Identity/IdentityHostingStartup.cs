@@ -1,4 +1,5 @@
 ﻿using System;
+using BookCatalog.DAL;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -20,6 +21,7 @@ namespace WebApplication2.Areas.Identity
                         context.Configuration.GetConnectionString("BookCatalog")));
 
                 services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<BookCatalogContext>()
                     .AddEntityFrameworkStores<WebApplication2Context>();
             });
         }

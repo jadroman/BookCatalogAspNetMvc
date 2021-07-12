@@ -4,6 +4,7 @@ using BookCatalog.DAL;
 using BookCatalog.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,8 +27,10 @@ namespace BookCatalog.Web
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
+
             services.AddDbContext<BookCatalogContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BookCatalog")).EnableSensitiveDataLogging());
+
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IBookCatalogContext, BookCatalogContext>();
