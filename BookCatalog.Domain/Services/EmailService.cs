@@ -19,7 +19,7 @@ namespace BookCatalog.Domain.Services
             {
                 Host = "smtp.gmail.com",
                 Port = 587,
-                Credentials = new NetworkCredential("jadrangrbaapp@gmail.com", "xX12345!"),
+                Credentials = new NetworkCredential("yourdomain@gmail.com", "yourpassword"),
                 EnableSsl = true
             };
         }
@@ -29,7 +29,7 @@ namespace BookCatalog.Domain.Services
 
             var mail = new MailMessage
             {
-                From = new MailAddress("jadrangrbaapp@gmail.com"),
+                From = new MailAddress("yourdomain@gmail.com"),
                 Subject = subject,
                 Body = htmlMessage,
                 IsBodyHtml = true
