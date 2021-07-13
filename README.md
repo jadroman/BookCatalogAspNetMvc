@@ -19,7 +19,7 @@ What is utilized?
 *	ASP.NET Identity
 *	DataTables (jQuery plug-in)
 *	Server-side paging and searching
-*	Twitter-bootstrap@4
+*	Twitter-bootstrap 4
 *	Serilog
 *	Xunit
 
@@ -33,7 +33,7 @@ How to run?
 *	File "appsettings.json" => change "server name" and "database name" if needed
 *	Choose "BookCatalog.Web" (Kestrel) launch setting from upper menu
 *	Run the app ("play" icon from upper menu)
-*	When app starts, database is created with few tables
+*	When app starts, database is created (migrated) with few tables
 *	Open the database and execute the Serilog script from the folder "doc => seriLogSql.sql"
 *	Go back to the running app in browser
 *	Register a user (no email confirmation needed)
