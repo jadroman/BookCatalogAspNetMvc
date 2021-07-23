@@ -90,7 +90,7 @@ namespace BookCatalog.Web.Controllers
                 Book = bookEditBindModel
             };
 
-            ViewData["AllCategories"] = new SelectList(await _bookService.GetAllCategories(), "Id", "Name", bookEntity.CategoryId);
+            ViewBag.AllCategories = new SelectList(await _bookService.GetAllCategories(), "Id", "Name", bookEntity.CategoryId);
 
             return View(model);
         }
@@ -136,7 +136,7 @@ namespace BookCatalog.Web.Controllers
 
         public async Task<IActionResult> Create()
         {
-            ViewData["AllCategories"] = new SelectList(await _bookService.GetAllCategories(), "Id", "Name");
+            ViewBag.AllCategories = new SelectList(await _bookService.GetAllCategories(), "Id", "Name");
             return View();
         }
 

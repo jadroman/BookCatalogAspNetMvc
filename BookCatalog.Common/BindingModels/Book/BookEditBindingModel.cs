@@ -32,8 +32,8 @@ namespace BookCatalog.Common.BindingModels.Book
 
         [Display(Name = "Already read")]
         public bool Read { get; set; }
-        public int? CategoryId { get; set; }
 
-        //public CategoryDetailsBindingModel Category { get; set; }
+        [Display(Name = "Category")]
+        public int? CategoryId { get; set; }
     }
 }
