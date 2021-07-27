@@ -13,6 +13,8 @@ using BookCatalog.Web.Models.ViewModels.Book;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using BookCatalog.Common.Entities;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace BookCatalog.Web.Controllers
 {
@@ -21,16 +23,25 @@ namespace BookCatalog.Web.Controllers
     {
         private readonly ILogger<BookController> _logger;
         private readonly IBookService _bookService;
+        private IMapper _mapper;
 
-        public BookController(ILogger<BookController> logger, IBookService bookService)
+        public BookController(ILogger<BookController> logger, IBookService bookService, IMapper mapper)
         {
             _logger = logger;
             _bookService = bookService;
+            _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var books = await _bookService.GetAllBooks();
+
+            var model = new BookListViewModel
+            {
+                Books = _mapper.Map<IEnumerable<BookListBindingModel>>(books)
+            };
+
+            return View(model);
         }
 
         public async Task<IActionResult> Details(int id)

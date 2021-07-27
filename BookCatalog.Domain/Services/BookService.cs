@@ -26,6 +26,11 @@ namespace BookCatalog.Domain.Services
             return  _context.Books.AsNoTracking().CountAsync();
         }
 
+        public async Task<List<Book>> GetAllBooks()
+        {
+            return await _context.Books.AsNoTracking().ToListAsync();
+        }
+
         public async Task<List<Book>> GetFilteredBooks(GridFilter filter)
         {
             var bookData = _context.Books.AsNoTracking();

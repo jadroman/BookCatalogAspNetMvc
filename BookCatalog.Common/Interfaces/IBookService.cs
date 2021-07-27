@@ -15,5 +15,6 @@ namespace BookCatalog.Common.Interfaces
         Task<int> DeleteBook(Book book);
         Task<List<Category>> GetAllCategories();
         Task<Category> GetCategoryById(int id);
+        Task<List<Book>> GetAllBooks();
     }
 }
