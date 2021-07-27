@@ -2,6 +2,7 @@
 using BookCatalog.Common.Entities;
 using BookCatalog.Common.Helpers;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookCatalog.Common.Interfaces
@@ -16,5 +17,6 @@ namespace BookCatalog.Common.Interfaces
         Task<List<Category>> GetAllCategories();
         Task<Category> GetCategoryById(int id);
         Task<List<Book>> GetAllBooks();
+        IQueryable<Book> GetBooks(BookParameters bookParameters);
     }
 }

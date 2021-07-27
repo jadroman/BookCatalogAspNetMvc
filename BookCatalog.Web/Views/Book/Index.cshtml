@@ -1,5 +1,10 @@
 ﻿@model BookListViewModel
 
+
+@using BookCatalog.Common.Entities;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
 <h1 style="margin-bottom:20px;margin-top: 5px">Books</h1>
 <p>
     <a class="btn btn-outline-success btn-sm" asp-action="Create">Add</a>
@@ -18,15 +23,14 @@
                 <td>@b.Title</td>
                 <td>@b.Author</td>
                 <td class="text-center">
-                    <a asp-action="Details" asp-route-id="@b.Id"
-                       class="btn btn-sm btn-info">Details</a>
                     <a asp-action="Edit" asp-route-id="@b.Id"
                        class="btn btn-sm btn-warning">Edit</a>
                     <a asp-action="Delete" asp-route-id="@b.Id"
                        class="btn btn-sm btn-danger">Delete</a>
                 </td>
             </tr>
-}
+        }
     </tbody>
 </table>
+@Html.PagedListPager((IPagedList)Model.Books, pageNumber => Url.Action("Index", new { pageNumber }))
 

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 using BookCatalog.Common.Entities;
 using AutoMapper;
 using System.Collections.Generic;
+using X.PagedList;
 
 namespace BookCatalog.Web.Controllers
 {
@@ -32,14 +33,28 @@ namespace BookCatalog.Web.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery] BookParameters bookParameters)
         {
-            var books = await _bookService.GetAllBooks();
+            //bookParameters.PageNumber = page ?? 1;
+            //const int pageSize = 10;
+            
+            var booksEntities = _bookService.GetBooks(bookParameters);
+
+            var pagedList = await booksEntities.ToPagedListAsync(bookParameters.PageNumber, bookParameters.PageSize);
 
             var model = new BookListViewModel
             {
-                Books = _mapper.Map<IEnumerable<BookListBindingModel>>(books)
+
+                Books = pagedList
             };
+
+
+
+            //var booksEntities = _bookService.GetBooks(bookParameters);
+
+
+            //var pagedListModel = model.Books.ToPagedList(page ?? 1, pageSize);
+            //model.Books = model.Books.ToPagedList(page ?? 1, pageSize);
 
             return View(model);
         }

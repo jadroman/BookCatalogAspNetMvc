@@ -5,11 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace BookCatalog.Web.Models.ViewModels.Book
 {
     public class BookListViewModel
     {
-        public IEnumerable<BookListBindingModel> Books { get; set; }
+        public IPagedList<BookCatalog.Common.Entities.Book> Books { get; set; }
     }
 }

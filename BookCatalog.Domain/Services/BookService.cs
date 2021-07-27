@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 using System.Linq;
 using BookCatalog.Common.BindingModels.Book;
+using System.Reflection;
+using System.Text;
 
 namespace BookCatalog.Domain.Services
 {
@@ -19,6 +21,92 @@ namespace BookCatalog.Domain.Services
         public BookService(IBookCatalogContext context)
         {
             _context = context;
+        }
+
+        public IQueryable<Book> GetBooks(BookParameters bookParameters)
+        {
+            // 1. Filter all results
+            var books = Filter(bookParameters);
+
+            // 2. Search for specific
+            Search(ref books, bookParameters);
+
+            // 3. sort by params
+            Sort(ref books, bookParameters.OrderBy);
+
+            // 4. Do paging of the final results
+            return books;
+        }
+
+
+        private void Search(ref IQueryable<Book> books, BookParameters bookParameters)
+        {
+            if (!books.Any())
+                return;
+
+            if (!string.IsNullOrWhiteSpace(bookParameters.Title))
+                books = books.Where(o => o.Title.ToLower().Contains(bookParameters.Title.Trim().ToLower()));
+
+            if (!string.IsNullOrWhiteSpace(bookParameters.Note))
+                books = books.Where(o => o.Note.ToLower().Contains(bookParameters.Note.Trim().ToLower()));
+
+            if (!string.IsNullOrWhiteSpace(bookParameters.Author))
+                books = books.Where(o => o.Author.ToLower().Contains(bookParameters.Author.Trim().ToLower()));
+        }
+
+        private IQueryable<Book> Filter(BookParameters bookParameters)
+        {
+            var books = _context.Books.OrderBy(b => b.Title)
+                                                    .AsNoTracking();
+
+            if (bookParameters.MinYear > 0 && bookParameters.MaxYear > 0)
+            {
+                books = books.Where(b => b.Year >= bookParameters.MinYear &&
+                                                b.Year <= bookParameters.MaxYear).OrderBy(on => on.Title)
+                                                    .AsNoTracking();
+            }
+
+            return books;
+        }
+
+        private void Sort<T>(ref IQueryable<T> entities, string orderByQueryString)
+        {
+            if (!entities.Any())
+                return;
+
+            if (string.IsNullOrWhiteSpace(orderByQueryString))
+            {
+                return;
+            }
+
+            var entityParams = orderByQueryString.Trim().Split(',');
+            var propertyInfos = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var entityQueryBuilder = new StringBuilder();
+
+            foreach (var param in entityParams)
+            {
+                if (string.IsNullOrWhiteSpace(param))
+                    continue;
+
+                var propertyFromQueryName = param.Split(" ")[0];
+                var objectProperty = propertyInfos.FirstOrDefault(pi => pi.Name.Equals(propertyFromQueryName, StringComparison.InvariantCultureIgnoreCase));
+
+                if (objectProperty == null)
+                    continue;
+
+                var sortingOrder = param.EndsWith(" desc") ? "descending" : "ascending";
+
+                entityQueryBuilder.Append($"{objectProperty.Name} {sortingOrder}, ");
+            }
+
+            var entityQuery = entityQueryBuilder.ToString().TrimEnd(',', ' ');
+
+            if (string.IsNullOrWhiteSpace(entityQuery))
+            {
+                return;
+            }
+
+            entities = entities.OrderBy(entityQuery);
         }
 
         public Task<int> CountAllBooks()
