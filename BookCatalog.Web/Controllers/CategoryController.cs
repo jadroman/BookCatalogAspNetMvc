@@ -9,6 +9,8 @@ using System.Linq.Dynamic.Core;
 using BookCatalog.Common.Helpers;
 using BookCatalog.Common.BindingModels.Category;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
+using BookCatalog.Common.Entities;
 
 namespace BookCatalog.Web.Controllers
 {
@@ -17,11 +19,13 @@ namespace BookCatalog.Web.Controllers
     {
         private readonly ILogger<CategoryController> _logger;
         private readonly ICategoryService _categoryService;
+        private IMapper _mapper;
 
-        public CategoryController(ILogger<CategoryController> logger, ICategoryService categoryService)
+        public CategoryController(ILogger<CategoryController> logger, ICategoryService categoryService, IMapper mapper)
         {
             _logger = logger;
             _categoryService = categoryService;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -82,14 +86,16 @@ namespace BookCatalog.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var categToUpdate = await _categoryService.GetCategoryById(categoryBind.Category.Id);
+                var categoryEntity = await _categoryService.GetCategoryById(categoryBind.Category.Id, true);
 
-                if (categToUpdate == null)
+                if (categoryEntity == null)
                 {
                     return NotFound();
                 }
 
-                if (await _categoryService.SaveCategory(categoryBind.Category) < 1)
+                _mapper.Map(categoryBind.Category, categoryEntity);
+
+                if (await _categoryService.SaveCategory(categoryEntity) < 1)
                 {
                     ModelState.AddModelError("", "Unable to save changes. " +
                         "Try again, and if the problem persists, " +
@@ -114,7 +120,8 @@ namespace BookCatalog.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _categoryService.SaveCategory(categoryBind.Category);
+                var categoryEntity = _mapper.Map<Category>(categoryBind.Category);
+                await _categoryService.SaveCategory(categoryEntity);
             }
             return RedirectToAction(nameof(Index));
         }

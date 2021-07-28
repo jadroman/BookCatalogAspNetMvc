@@ -15,6 +15,9 @@ namespace BookCatalog.Web
         {
             CreateMap<BookEditBindingModel, Book>();
             CreateMap<Book, BookEditBindingModel>();
+
+            CreateMap<CategoryEditBindingModel, Category>();
+            CreateMap<Category, CategoryEditBindingModel>();
         }
     }
 }

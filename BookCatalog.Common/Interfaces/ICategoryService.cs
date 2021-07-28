@@ -13,8 +13,8 @@ namespace BookCatalog.Common.Interfaces
 {
     public interface ICategoryService
     {
-        Task<Category> GetCategoryById(int id);
-        Task<int> SaveCategory(CategoryEditBindingModel category);
+        Task<Category> GetCategoryById(int id, bool trackEntity = false);
+        Task<int> SaveCategory(Category category);
         Task<List<Category>> GetFilteredCategories(GridFilter filter);
         Task<int> CountAllCategories();
         Task<Result<int>> DeleteCategory(Category category);

@@ -45,11 +45,21 @@ namespace BookCatalog.Domain.Services
             return await categoryData.Skip(filter.Skip).Take(filter.PageSize).ToListAsync();
         }
 
-        public async Task<Category> GetCategoryById(int id)
+        public async Task<Category> GetCategoryById(int id, bool trackEntity = false)
         {
-            var category = await _context.Categories
+            Category category;
+
+            if (trackEntity)
+            {
+                category = await _context.Categories
+                 .FirstOrDefaultAsync(c => c.Id == id);
+            }
+            else
+            {
+                category = await _context.Categories
                  .AsNoTracking()
                  .FirstOrDefaultAsync(c => c.Id == id);
+            }
 
             return category;
         }
@@ -63,21 +73,11 @@ namespace BookCatalog.Domain.Services
             return category;
         }
 
-        public async Task<int> SaveCategory(CategoryEditBindingModel categoryBinding)
+        public async Task<int> SaveCategory(Category category)
         {
-            var category = new Category
-            {
-                Id = categoryBinding.Id,
-                Name = categoryBinding.Name
-            };
-
             if (category.Id == 0)
             {
                 await _context.Categories.AddAsync(category);
-            }
-            else
-            {
-                _context.Update(category);
             }
 
             return await _context.SaveChangesAsync();
