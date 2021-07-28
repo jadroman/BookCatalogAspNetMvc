@@ -1,59 +1,114 @@
 ﻿@model BookDetailsViewModel
 
 <h1 style="margin-bottom:20px;margin-top: 5px">Book details</h1>
-<hr />
-<div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.Title)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.Author)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.Author)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.Category)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.Category.Name)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.Collection)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.Collection)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.Read)
-        </dt>
-        <dd class="col-sm-10">
-            @(Model.Book.Read ? "Yes" : "No")
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.Note)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.Note)
-        </dd>
-    </dl>
-</div>
-<hr />
-<div>
-    <a class="btn btn-outline-secondary  btn-sm" asp-action="Index">Back to List</a>
-    <a class="btn btn-outline-success  btn-sm" asp-action="Edit" asp-route-id="@Model.Book.Id">Edit</a> 
+
+<div class="row">
+    <form class="card card-body bg-light mt-5">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>@Html.DisplayNameFor(model => model.Book.Title)</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.DisplayFor(model => model.Book.Title)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>@Html.DisplayNameFor(model => model.Book.Author)</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.DisplayFor(model => model.Book.Author)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>@Html.DisplayNameFor(model => model.Book.Category)</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.DisplayFor(model => model.Book.Category.Name)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>@Html.DisplayNameFor(model => model.Book.Collection)</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.DisplayFor(model => model.Book.Collection)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>@Html.DisplayNameFor(model => model.Book.Read)</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @(Model.Book.Read ? "Yes" : "No")
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>@Html.DisplayNameFor(model => model.Book.Note)</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.DisplayFor(model => model.Book.Note)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>@Html.DisplayNameFor(model => model.Book.Year)</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.DisplayFor(model => model.Book.Year)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>@Html.DisplayNameFor(model => model.Book.Publisher)</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.DisplayFor(model => model.Book.Publisher)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-auto">
+                    <a class="btn btn-outline-secondary  btn-md" asp-action="Index">Back to List</a>
+                </div>
+                <div class="col-md-auto">
+                    <a class="btn btn-outline-success  btn-md" asp-action="Edit" asp-route-id="@Model.Book.Id">Edit</a>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
