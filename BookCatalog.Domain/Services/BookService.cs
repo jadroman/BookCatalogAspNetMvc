@@ -43,11 +43,21 @@ namespace BookCatalog.Domain.Services
             return await bookData.Skip(filter.Skip).Take(filter.PageSize).ToListAsync();
         }
 
-        public async Task<Book> GetBookById(int id)
+        public async Task<Book> GetBookById(int id, bool trackEntity = false)
         {
-            var book = await _context.Books.Include(b => b.Category)
+            Book book;
+
+            if (trackEntity)
+            {
+                book = await _context.Books.Include(b => b.Category)
+                 .FirstOrDefaultAsync(c => c.Id == id);
+            }
+            else
+            {
+                book = await _context.Books.Include(b => b.Category)
                  .AsNoTracking()
                  .FirstOrDefaultAsync(c => c.Id == id);
+            }
 
             return book;
         }
@@ -66,10 +76,6 @@ namespace BookCatalog.Domain.Services
             if (book.Id == 0)
             {
                 await _context.Books.AddAsync(book);
-            }
-            else
-            {
-                _context.Update(book);
             }
 
             return await _context.SaveChangesAsync();

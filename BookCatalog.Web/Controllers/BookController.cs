@@ -13,6 +13,7 @@ using BookCatalog.Web.Models.ViewModels.Book;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using BookCatalog.Common.Entities;
+using AutoMapper;
 
 namespace BookCatalog.Web.Controllers
 {
@@ -21,11 +22,13 @@ namespace BookCatalog.Web.Controllers
     {
         private readonly ILogger<BookController> _logger;
         private readonly IBookService _bookService;
+        private IMapper _mapper;
 
-        public BookController(ILogger<BookController> logger, IBookService bookService)
+        public BookController(ILogger<BookController> logger, IBookService bookService, IMapper mapper)
         {
             _logger = logger;
             _bookService = bookService;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -102,27 +105,16 @@ namespace BookCatalog.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var bookToUpdate = await _bookService.GetBookById(bookBind.Book.Id);
+                var bookEntity = await _bookService.GetBookById(bookBind.Book.Id, true);
 
-                if (bookToUpdate == null)
+                if (bookEntity == null)
                 {
                     return NotFound();
                 }
 
-                var book = new Book
-                {
-                    Id = bookBind.Book.Id,
-                    Author = bookBind.Book.Author,
-                    Title = bookBind.Book.Title,
-                    CategoryId = bookBind.Book.CategoryId,
-                    Collection = bookBind.Book.Collection,
-                    Note = bookBind.Book.Note,
-                    Publisher = bookBind.Book.Publisher,
-                    Read = bookBind.Book.Read,
-                    Year = bookBind.Book.Year
-                };
+                _mapper.Map(bookBind.Book, bookEntity);
 
-                if (await _bookService.SaveBook(book) < 1)
+                if (await _bookService.SaveBook(bookEntity) < 1)
                 {
                     ModelState.AddModelError("", "Unable to save changes. " +
                         "Try again, and if the problem persists, " +
@@ -147,20 +139,8 @@ namespace BookCatalog.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var book = new Book
-                {
-                    Id = bookBind.Book.Id,
-                    Author = bookBind.Book.Author,
-                    Title = bookBind.Book.Title,
-                    CategoryId = bookBind.Book.CategoryId,
-                    Collection = bookBind.Book.Collection,
-                    Note = bookBind.Book.Note,
-                    Publisher = bookBind.Book.Publisher,
-                    Read = bookBind.Book.Read,
-                    Year = bookBind.Book.Year
-                };
-
-                await _bookService.SaveBook(book);
+                var bookEntity = _mapper.Map<Book>(bookBind.Book);
+                await _bookService.SaveBook(bookEntity);
             }
             return RedirectToAction(nameof(Index));
         }

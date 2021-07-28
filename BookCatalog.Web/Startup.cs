@@ -1,4 +1,5 @@
 
+using AutoMapper;
 using BookCatalog.Common.Interfaces;
 using BookCatalog.DAL;
 using BookCatalog.Domain.Services;
@@ -31,6 +32,7 @@ namespace BookCatalog.Web
             services.AddDbContext<BookCatalogContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BookCatalog")).EnableSensitiveDataLogging());
 
+            services.AddAutoMapper(typeof(Startup));
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IBookCatalogContext, BookCatalogContext>();

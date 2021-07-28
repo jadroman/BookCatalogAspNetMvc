@@ -8,7 +8,7 @@ namespace BookCatalog.Common.Interfaces
 {
     public interface IBookService
     {
-        Task<Book> GetBookById(int id);
+        Task<Book> GetBookById(int id, bool trackEntity = false);
         Task<int> SaveBook(Book book);
         Task<List<Book>> GetFilteredBooks(GridFilter filter);
         Task<int> CountAllBooks();
