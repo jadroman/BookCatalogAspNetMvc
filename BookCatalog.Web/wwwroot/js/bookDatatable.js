@@ -1,5 +1,9 @@
 ﻿$(document).ready(function () {
     var t = $("#bookDatatable").DataTable({
+        initComplete: function () {
+            $('input[type=search]').attr("placeholder", "by title or author");
+        },
+
         "searchDelay": 500,
         "processing": true,
         "serverSide": true,
