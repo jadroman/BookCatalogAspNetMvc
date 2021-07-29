@@ -23,5 +23,10 @@
       "library": "datatables@1.10.21",
       "destination": "wwwroot/lib/datatables/"
     }
-  ]
+  ,
+{
+  "library": "datatables-responsive@2.2.9",
+  "destination": "wwwroot/lib/datatables-responsive/"
+}
+]
 }
