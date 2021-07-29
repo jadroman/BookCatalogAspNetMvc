@@ -1,5 +1,9 @@
+[TOC]
+
 Short overview:
 ===============
+
+
 
 
 What is this?
@@ -10,18 +14,21 @@ Very simple book catalog web application I created for the purpose of exercise.
 ![screenshot](doc/booksScreen.png "app screenshot")
 
 
+
+
 What is utilized?
 -------------------
 
 * .NET 5.0
 * MS SQL 2019
 * Entity framework 5
-*	ASP.NET Identity
-*	DataTables (jQuery plug-in)
-*	Server-side paging and searching
-*	Twitter-bootstrap 4
-*	Serilog
+* ASP.NET Identity
+* DataTables (jQuery plug-in)
+* Server-side paging and searching
+* Twitter-bootstrap 4
+* Serilog
 *	Xunit
+
 
 
 How to run?
@@ -39,3 +46,10 @@ How to run?
 *	Register a user (no email confirmation needed)
 *	Create a few categories
 *	Create a few books
+
+
+
+## Work in progress...
+
+- Create partial view to share same html between "Create" and "Edit" views.
+- Create partial view to share same html between "Details" and "Delete" views.
