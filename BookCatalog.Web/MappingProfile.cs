@@ -13,9 +13,11 @@ namespace BookCatalog.Web
     {
         public MappingProfile()
         {
+            CreateMap<Book, BookDetailsBindingModel>();
             CreateMap<BookEditBindingModel, Book>();
             CreateMap<Book, BookEditBindingModel>();
 
+            CreateMap<Category, CategoryDetailsBindingModel>();
             CreateMap<CategoryEditBindingModel, Category>();
             CreateMap<Category, CategoryEditBindingModel>();
         }

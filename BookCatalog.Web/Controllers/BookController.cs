@@ -1,5 +1,4 @@
-﻿using BookCatalog.Common.BindingModels;
-using BookCatalog.Common.Interfaces;
+﻿using BookCatalog.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 using BookCatalog.Common.Helpers;
-using BookCatalog.Common.BindingModels.Category;
 using BookCatalog.Common.BindingModels.Book;
 using BookCatalog.Web.Models.ViewModels.Book;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,7 +20,7 @@ namespace BookCatalog.Web.Controllers
     {
         private readonly ILogger<BookController> _logger;
         private readonly IBookService _bookService;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public BookController(ILogger<BookController> logger, IBookService bookService, IMapper mapper)
         {
@@ -45,22 +43,9 @@ namespace BookCatalog.Web.Controllers
                 return NotFound();
             }
 
-            var bookDetailsBindModel = new BookDetailsBindingModel
-            {
-                Id = bookEntity.Id,
-                Title = bookEntity.Title,
-                Author = bookEntity.Author,
-                Collection = bookEntity.Collection,
-                Note = bookEntity.Note,
-                Publisher = bookEntity.Publisher,
-                Read = bookEntity.Read,
-                Year = bookEntity.Year,
-                Category = new CategoryDetailsBindingModel { Id = bookEntity.Category?.Id, Name = bookEntity.Category?.Name }
-            };
-
             var model = new BookDetailsViewModel
             {
-                Book = bookDetailsBindModel
+                Book = _mapper.Map<BookDetailsBindingModel>(bookEntity)
             };
 
             return View(model);
@@ -75,22 +60,9 @@ namespace BookCatalog.Web.Controllers
                 return NotFound();
             }
 
-            var bookEditBindModel = new BookEditBindingModel
-            {
-                Id = bookEntity.Id,
-                Title = bookEntity.Title,
-                Author = bookEntity.Author,
-                Collection = bookEntity.Collection,
-                Note = bookEntity.Note,
-                Publisher = bookEntity.Publisher,
-                Read = bookEntity.Read,
-                Year = bookEntity.Year,
-                CategoryId= bookEntity.CategoryId
-            };
-
             var model = new BookEditViewModel
             {
-                Book = bookEditBindModel
+                Book = _mapper.Map<BookEditBindingModel>(bookEntity)
             };
 
             ViewBag.AllCategories = new SelectList(await _bookService.GetAllCategories(), "Id", "Name", bookEntity.CategoryId);
@@ -119,6 +91,9 @@ namespace BookCatalog.Web.Controllers
                     ModelState.AddModelError("", "Unable to save changes. " +
                         "Try again, and if the problem persists, " +
                         "see your system administrator.");
+
+                    _logger.LogError($"Unable to Update the book:  {StringHelper.PrintObjectProps(bookBind.Book)}");
+
                     return View(bookBind);
                 }
 
@@ -140,7 +115,17 @@ namespace BookCatalog.Web.Controllers
             if (ModelState.IsValid)
             {
                 var bookEntity = _mapper.Map<Book>(bookBind.Book);
-                await _bookService.SaveBook(bookEntity);
+
+                if (await _bookService.SaveBook(bookEntity) < 1)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
+
+                    _logger.LogError($"Unable to Create the book:  {StringHelper.PrintObjectProps(bookBind.Book)}");
+
+                    return View(bookBind);
+                }
             }
             return RedirectToAction(nameof(Index));
         }
@@ -182,22 +167,9 @@ namespace BookCatalog.Web.Controllers
                 return NotFound();
             }
 
-            var bookDetailsBindModel = new BookDetailsBindingModel
-            {
-                Id = bookEntity.Id,
-                Title = bookEntity.Title,
-                Author = bookEntity.Author,
-                Collection = bookEntity.Collection,
-                Note = bookEntity.Note,
-                Publisher = bookEntity.Publisher,
-                Read = bookEntity.Read,
-                Year = bookEntity.Year,
-                Category = new CategoryDetailsBindingModel { Id = bookEntity.Category?.Id, Name = bookEntity.Category?.Name }
-            };
-
             var model = new BookDetailsViewModel
             {
-                Book = bookDetailsBindModel
+                Book = _mapper.Map<BookDetailsBindingModel>(bookEntity)
             };
 
             return View(model);
@@ -207,32 +179,24 @@ namespace BookCatalog.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var book = await _bookService.GetBookById(id);
-            if (book == null)
+            var bookEntity = await _bookService.GetBookById(id);
+
+            if (bookEntity == null)
             {
                 return RedirectToAction(nameof(Index));
             }
 
-            if (await _bookService.DeleteBook(book) < 1)
+            if (await _bookService.DeleteBook(bookEntity) < 1)
             {
-                ModelState.AddModelError("", "Unable to delete the book.");
+                ModelState.AddModelError("", "Unable to delete the book. " +
+                          "Try again, and if the problem persists, " +
+                          "see your system administrator.");
 
-                var bookDetailsBindModel = new BookDetailsBindingModel
-                {
-                    Id = book.Id,
-                    Title = book.Title,
-                    Author = book.Author,
-                    Collection = book.Collection,
-                    Note = book.Note,
-                    Publisher = book.Publisher,
-                    Read = book.Read,
-                    Year = book.Year,
-                    Category = new CategoryDetailsBindingModel { Id = book.Category.Id, Name = book.Category.Name }
-                };
+                _logger.LogError($"Unable to delete the book:  {StringHelper.PrintObjectProps(bookEntity)}");
 
                 return View(new BookDetailsViewModel
                 {
-                    Book = bookDetailsBindModel
+                    Book = _mapper.Map<BookDetailsBindingModel>(bookEntity)
                 });
             }
 

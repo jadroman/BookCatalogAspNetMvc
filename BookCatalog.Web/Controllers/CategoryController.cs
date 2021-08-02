@@ -19,7 +19,7 @@ namespace BookCatalog.Web.Controllers
     {
         private readonly ILogger<CategoryController> _logger;
         private readonly ICategoryService _categoryService;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public CategoryController(ILogger<CategoryController> logger, ICategoryService categoryService, IMapper mapper)
         {
@@ -42,15 +42,9 @@ namespace BookCatalog.Web.Controllers
                 return NotFound();
             }
 
-            var catDetailsBindModel = new CategoryDetailsBindingModel
-            {
-                Id = catEntity.Id,
-                Name = catEntity.Name
-            };
-
             var model = new CategoryDetailsViewModel
             {
-                Category = catDetailsBindModel
+                Category = _mapper.Map<CategoryDetailsBindingModel>(catEntity)
             };
 
             return View(model);
@@ -65,15 +59,9 @@ namespace BookCatalog.Web.Controllers
                 return NotFound();
             }
 
-            var catEditBindModel = new CategoryEditBindingModel
-            {
-                Id = catEntity.Id,
-                Name = catEntity.Name
-            };
-
             var model = new CategoryEditViewModel
             {
-                Category = catEditBindModel
+                Category = _mapper.Map<CategoryEditBindingModel>(catEntity)
             };
 
             return View(model);
@@ -100,6 +88,9 @@ namespace BookCatalog.Web.Controllers
                     ModelState.AddModelError("", "Unable to save changes. " +
                         "Try again, and if the problem persists, " +
                         "see your system administrator.");
+
+                    _logger.LogError($"Unable to Update the category:  {StringHelper.PrintObjectProps(categoryBind.Category)}");
+
                     return View(categoryBind);
                 }
 
@@ -121,7 +112,16 @@ namespace BookCatalog.Web.Controllers
             if (ModelState.IsValid)
             {
                 var categoryEntity = _mapper.Map<Category>(categoryBind.Category);
-                await _categoryService.SaveCategory(categoryEntity);
+                if(await _categoryService.SaveCategory(categoryEntity) < 1)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
+
+                    _logger.LogError($"Unable to insert the category:  {StringHelper.PrintObjectProps(categoryBind.Category)}");
+
+                    return View(categoryBind);
+                }
             }
             return RedirectToAction(nameof(Index));
         }
@@ -131,36 +131,28 @@ namespace BookCatalog.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> GetCategories()
         {
-            try
+            var draw = Request.Form["draw"].FirstOrDefault();
+            var start = Request.Form["start"].FirstOrDefault();
+            var length = Request.Form["length"].FirstOrDefault();
+            var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+            var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+            var searchValue = Request.Form["search[value]"].FirstOrDefault();
+            int pageSize = length != null ? Convert.ToInt32(length) : 0;
+            int skip = start != null ? Convert.ToInt32(start) : 0;
+
+            var filter = new GridFilter
             {
-                var draw = Request.Form["draw"].FirstOrDefault();
-                var start = Request.Form["start"].FirstOrDefault();
-                var length = Request.Form["length"].FirstOrDefault();
-                var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
-                var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
-                var searchValue = Request.Form["search[value]"].FirstOrDefault();
-                int pageSize = length != null ? Convert.ToInt32(length) : 0;
-                int skip = start != null ? Convert.ToInt32(start) : 0;
+                PageSize = pageSize,
+                SearchValue = searchValue,
+                Skip = skip,
+                SortColumn = sortColumn,
+                SortColumnDirection = sortColumnDirection
+            };
 
-                var filter = new GridFilter
-                {
-                    PageSize = pageSize,
-                    SearchValue = searchValue,
-                    Skip = skip,
-                    SortColumn = sortColumn,
-                    SortColumnDirection = sortColumnDirection
-                };
-
-                int recordsTotal = await _categoryService.CountAllCategories();
-                var data = await _categoryService.GetFilteredCategories(filter);
-                var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data };
-                return Ok(jsonData);
-
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            int recordsTotal = await _categoryService.CountAllCategories();
+            var data = await _categoryService.GetFilteredCategories(filter);
+            var jsonData = new { draw, recordsFiltered = recordsTotal, recordsTotal, data };
+            return Ok(jsonData);
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -172,15 +164,9 @@ namespace BookCatalog.Web.Controllers
                 return NotFound();
             }
 
-            var catDetailsBindModel = new CategoryDetailsBindingModel
-            {
-                Id = catEntity.Id,
-                Name = catEntity.Name
-            };
-
             var model = new CategoryDetailsViewModel
             {
-                Category = catDetailsBindModel
+                Category = _mapper.Map<CategoryDetailsBindingModel>(catEntity)
             };
 
             return View(model);
@@ -190,28 +176,35 @@ namespace BookCatalog.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _categoryService.GetCategoryByIdWithBooks(id);
-            if (category == null)
+            var catEntity = await _categoryService.GetCategoryByIdWithBooks(id);
+            if (catEntity == null)
             {
                 return NotFound();
             }
 
-            var deleteCategResult = await _categoryService.DeleteCategory(category);
+            var deleteCategResult = await _categoryService.DeleteCategory(catEntity);
 
             if (!deleteCategResult.IsSuccessful)
             {
                 _logger.LogError(deleteCategResult.Error + $" Categori id = {id}");
                 ModelState.AddModelError("", deleteCategResult.Error);
 
-                var catDetailsBindModel = new CategoryDetailsBindingModel
+                return View(new CategoryDetailsViewModel
                 {
-                    Id = category.Id,
-                    Name = category.Name
-                };
+                    Category = _mapper.Map<CategoryDetailsBindingModel>(catEntity)
+                });
+            }
+            else if (deleteCategResult.Data < 1)
+            {
+                ModelState.AddModelError("", "Unable to delete the category. " +
+                          "Try again, and if the problem persists, " +
+                          "see your system administrator.");
+
+                _logger.LogError($"Unable to delete the category:  {StringHelper.PrintObjectProps(catEntity)}");
 
                 return View(new CategoryDetailsViewModel
                 {
-                    Category = catDetailsBindModel
+                    Category = _mapper.Map<CategoryDetailsBindingModel>(catEntity)
                 });
             }
 

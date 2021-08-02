@@ -52,4 +52,9 @@ How to run?
 ## Work in progress...
 
 - Create partial view to share same html between "Create" and "Edit" views.
+  - The point is we reduce unneeded code repetition
 - Create partial view to share same html between "Details" and "Delete" views.
+  - The point is we reduce unneeded code repetition
+- Add "Result Pattern", a layer between service and controller which contains the logic of determining if result is eg. "Ok", "Invalid", "Unauthorized" etc. 
+  - The point is to remove that logic from controller.
+  - https://alexdunn.org/2019/02/25/clean-up-your-client-to-business-logic-relationship-with-a-result-pattern-c/
