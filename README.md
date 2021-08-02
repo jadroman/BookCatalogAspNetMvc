@@ -1,5 +1,3 @@
-[TOC]
-
 Short overview:
 ===============
 
@@ -58,3 +56,5 @@ How to run?
 - Add "Result Pattern", a layer between service and controller which contains the logic of determining if result is eg. "Ok", "Invalid", "Unauthorized" etc. 
   - The point is to remove that logic from controller.
   - https://alexdunn.org/2019/02/25/clean-up-your-client-to-business-logic-relationship-with-a-result-pattern-c/
+- There is only one unit test for now. We could add more unit or integration tests
+- Account management module is not finished completely. Email confirmation is disabled because I didn't setup smtp yet.
