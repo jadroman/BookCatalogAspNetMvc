@@ -1,7 +1,8 @@
 ﻿$(document).ready(function () {
     var t = $("#bookDatatable").DataTable({
         initComplete: function () {
-            $('input[type=search]').attr("placeholder", "by title or author");
+            $('input[type=search]').attr('placeholder', 'by title or author');
+            $('.container').css('max-width', '100%')
         },
         "responsive": true,
         "searchDelay": 500,
