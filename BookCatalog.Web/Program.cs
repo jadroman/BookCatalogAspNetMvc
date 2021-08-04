@@ -1,4 +1,3 @@
-using BookCatalog.DAL.MigrationManager;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -16,7 +15,7 @@ namespace BookCatalog.Web
             Log.Logger = new LoggerConfiguration().ReadFrom.Configuration
             (configuration).CreateLogger();
 
-            CreateHostBuilder(args).Build().MigrateDatabase().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
