@@ -49,6 +49,7 @@ How to run?
 
 ## Work in progress...
 
+- SSL/TLS Certificate is not setup
 - Create partial view to share same html between "Create" and "Edit" views.
   - The point is we reduce unneeded code repetition
 - Create partial view to share same html between "Details" and "Delete" views.
@@ -57,4 +58,6 @@ How to run?
   - The point is to remove that logic from controller.
   - https://alexdunn.org/2019/02/25/clean-up-your-client-to-business-logic-relationship-with-a-result-pattern-c/
 - There is only one unit test for now. We could add more unit or integration tests
-- Account management module is not finished completely. Email confirmation is disabled because I didn't setup smtp yet.
+- Account management module is not finished completely. 
+  - Forgot password is not working
+  - Email confirmation is disabled because I didn't setup smtp yet.
