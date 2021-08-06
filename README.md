@@ -50,6 +50,7 @@ How to run?
 ## Work in progress...
 
 - SSL/TLS Certificate is not setup
+- Add custom configuration provider to encrypt  connection string
 - Create partial view to share same html between "Create" and "Edit" views.
   - The point is we reduce unneeded code repetition
 - Create partial view to share same html between "Details" and "Delete" views.
