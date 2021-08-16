@@ -1,31 +1,36 @@
 ﻿@model CategoryDetailsViewModel
 
-<h1 style="margin-bottom:20px;margin-top: 5px">Category details</h1>
-<div class="row">
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-auto mb-1 mt-2">
+                    <h2>Category details</h2>
+                </div>
+            </div>
+            <form class="card card-body bg-light mt-1">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>@Html.DisplayNameFor(model => model.Category.Name)</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Html.DisplayFor(model => model.Category.Name)
+                        </div>
+                    </div>
+                </div>
 
-    <form class="card card-body bg-light mt-5">
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <strong>@Html.DisplayNameFor(model => model.Category.Name)</strong>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-auto">
+                            <a class="btn btn-outline-secondary  btn-md" asp-action="Index">Back to List</a>
+                        </div>
+                        <div class="col-sm-auto">
+                            <a class="btn btn-outline-success  btn-md" asp-action="Edit" asp-route-id="@Model.Category.Id">Edit</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    @Html.DisplayFor(model => model.Category.Name)
-                </div>
-            </div>
+            </form>
         </div>
-
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-auto">
-                    <a class="btn btn-outline-secondary  btn-md" asp-action="Index">Back to List</a>
-                </div>
-                <div class="col-md-auto">
-                    <a class="btn btn-outline-success  btn-md" asp-action="Edit" asp-route-id="@Model.Category.Id">Edit</a>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+    </div>
