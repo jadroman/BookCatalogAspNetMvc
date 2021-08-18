@@ -35,15 +35,14 @@ How to run?
 *	Clone or download code
 *	Open solution (Visual studio 2019 or later)
 *	Project "BookCatalog.Web" => set as startup project
-*	File "appsettings.json" => change "server name" and "database name" if needed
+*	In "appsettings.json", change "server name"  in the connection string if needed
 *	Choose "BookCatalog.Web" (Kestrel) launch setting from upper menu
 *	Run the app ("play" icon from upper menu)
 *	When app starts, database is created (migrated) with few tables
-*	Open the database and execute the Serilog script from the folder "doc => seriLogSql.sql"
-*	Go back to the running app in browser
-*	Register a user (no email confirmation needed)
-*	Create a few categories
-*	Create a few books
+*	Open the database and execute the sql script from the folder "doc => updateDatabase.sql"
+*	Username and password for the running app:
+  *	octopus@yahoo.com
+  *	2xSNzSa$
 
 
 
