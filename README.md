@@ -9,6 +9,12 @@ What is this?
 
 Very simple book catalog web application I created for the purpose of exercise. 
 
+Live test version: https://bookcatalogmvcstaging.jadro.space/
+
+Username and password for the app should be in my CV.
+
+
+
 ![screenshot](doc/booksScreen.png "app screenshot")
 
 
@@ -40,16 +46,13 @@ How to run?
 *	Run the app ("play" icon from upper menu)
 *	When app starts, database is created (migrated) with few tables
 *	Open the database and execute the sql script from the folder "doc => updateDatabase.sql"
-*	Username and password for the running app:
-  *	octopus@yahoo.com
-  *	2xSNzSa$
+*	Username and password for the app should be in my CV
 
 
 
 ## Work in progress...
 
-- SSL/TLS Certificate is not setup
-- Add custom configuration provider to encrypt  connection string
+- Add custom configuration provider to encrypt  the connection string
 - Create partial view to share same html between "Create" and "Edit" views.
   - The point is we reduce unneeded code repetition
 - Create partial view to share same html between "Details" and "Delete" views.
