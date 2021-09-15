@@ -1,17 +1,13 @@
-
 using AutoMapper;
 using BookCatalog.Common.Interfaces;
 using BookCatalog.DAL;
-using BookCatalog.Domain.Services;
+using BookCatalog.Web.Extensions;
+using BookCatalog.Web.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 
 namespace BookCatalog.Web
 {
@@ -28,29 +24,15 @@ namespace BookCatalog.Web
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
-
-            services.AddDbContext<BookCatalogContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("BookCatalog")).EnableSensitiveDataLogging());
-
+            services.ConfigureDbContext(Configuration);
+            services.ConfigureServices();
             services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IBookService, BookService>();
-            services.AddScoped<IBookCatalogContext, BookCatalogContext>();
-            services.AddScoped<IEmailSender, EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("X-Frame-Options", "DENY");
-                context.Response.Headers.Add("X-Xss-Protection", "1; mode=block");
-                context.Response.Headers.Add("Referrer-Policy", "no-referrer");
-                context.Response.Headers.Add("X-Permitted-Cross-Domain-Policies", "none");
-                await next();
-            });
-
+            app.UseSecurityHeaders();
 
             if (env.IsDevelopment())
             {
