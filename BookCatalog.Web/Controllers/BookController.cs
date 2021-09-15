@@ -127,7 +127,7 @@ namespace BookCatalog.Web.Controllers
                     return View(bookBind);
                 }
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index)); 
         }
 
         [HttpPost]

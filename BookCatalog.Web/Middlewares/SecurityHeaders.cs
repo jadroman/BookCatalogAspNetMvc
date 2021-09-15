@@ -26,12 +26,4 @@ namespace BookCatalog.Web.Middlewares
             await _next(httpContext); 
         }
     }
-
-    public static class SecurityHeadersExtensions
-    {
-        public static IApplicationBuilder UseSecurityHeaders(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<SecurityHeaders>();
-        }
-    }
 }
