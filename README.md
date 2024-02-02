@@ -24,12 +24,12 @@ What is utilized?
 -------------------
 
 * .NET 5.0
-* MS SQL 2019
+* MS SQL Server 2019
 * Entity framework 5
 * ASP.NET Identity
 * DataTables (jQuery plug-in)
   * Responsive extension for DataTables
-* Server-side paging and searching
+* Server-side paging, sorting and searching
 * Twitter-bootstrap 4
 * Serilog
 *	Xunit
@@ -56,13 +56,13 @@ How to run?
 
 - Add custom configuration provider to encrypt  the connection string
 - Create partial view to share same html between "Create" and "Edit" views.
-  - The point is we reduce unneeded code repetition
+  - The point is to reduce unneeded code repetition
 - Create partial view to share same html between "Details" and "Delete" views.
   - The point is we reduce unneeded code repetition
 - Add "Result Pattern", a layer between service and controller which contains the logic of determining if result is eg. "Ok", "Invalid", "Unauthorized" etc. 
   - The point is to remove that logic from controller.
   - https://alexdunn.org/2019/02/25/clean-up-your-client-to-business-logic-relationship-with-a-result-pattern-c/
-- There is only few unit tests for now. We could add more unit and integration tests
+- There is only few unit tests for now. More unit and integration tests could be added.
 - Account management module is not finished completely. 
   - Forgot password is not working
   - Email confirmation is disabled because I didn't setup smtp yet.
