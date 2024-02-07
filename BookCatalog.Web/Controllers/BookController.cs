@@ -86,17 +86,7 @@ namespace BookCatalog.Web.Controllers
 
                 _mapper.Map(bookBind.Book, bookEntity);
 
-                if (await _bookService.SaveBook(bookEntity) < 1)
-                {
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                        "Try again, and if the problem persists, " +
-                        "see your system administrator.");
-
-                    _logger.LogError($"Unable to Update the book:  {StringHelper.PrintObjectProps(bookBind.Book)}");
-
-                    return View(bookBind);
-                }
-
+                await _bookService.SaveBook(bookEntity);
             }
             return RedirectToAction(nameof(Index));
         }
