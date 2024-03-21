@@ -42,8 +42,7 @@ How to run?
 *	Clone or download code
 *	Open solution (Visual studio 2019 or later)
 *	Project "BookCatalog.Web" => set as startup project
-*	In "appsettings.json", change "server name"  in the connection string if needed
-*	Choose "BookCatalog.Web" (Kestrel) launch setting from upper menu
+*	Right click on the solution => "restore client-side libraries"
 *	Run the app ("play" icon from upper menu)
 *	When app starts, database is created (migrated is executed) with few tables
 *	The database is empty at the moment
