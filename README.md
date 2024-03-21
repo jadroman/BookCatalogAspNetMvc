@@ -7,11 +7,7 @@ Short overview:
 What is this?
 -------------
 
-Very simple book catalog web application I created for the purpose of exercise. 
-
-Live test version: https://bookcatalogmvcstaging.jadro.space/
-
-Username and password for the app should be in my cover letter or proposal.
+Very simple book catalog Asp.net MVC web application I created for the purpose of exercise. 
 
 
 
@@ -47,7 +43,9 @@ How to run?
 *	When app starts, database is created (migrated is executed) with few tables
 *	The database is empty at the moment
 *	Open the database and execute the sql script from the folder "doc => updateDatabase.sql"
-*	Username and password for the app  should be in my cover letter or proposal
+* Username and password for the app:
+  * username: "octopus@yahoo.com"
+  * password: "2xSNzSa$"
 
 
 
